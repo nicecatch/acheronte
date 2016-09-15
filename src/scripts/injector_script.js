@@ -1,3 +1,33 @@
+function getBatteryPromise() {
+	var battery=navigator.battery||navigator.webkitBattery||navigator.mozBattery;
+
+	if(battery){
+		return new Promise(function(resolve, reject){ resolve(battery); });
+	}
+	else if(navigator.getBattery){
+		return navigator.getBattery();
+	}
+
+	return new Promise(function(resolve, reject) { resolve({}); } );
+}
+
+function printBatteryPercentage() {
+
+    var battery_level = document.getElementById('battery-icon')
+
+    getBatteryPromise().then(function(battery) {
+        var text_to_append = ''
+        if(battery.dischargingTime == 'Infinity') {
+            text_to_append = 'No Battery'
+        } else {
+            text_to_append = battery.level * 100 + '%';
+        }   
+        
+	    battery_level.innerText = text_to_append
+    });
+}
+
+
 function load_extension(){
     var div_dock = document.createElement('div')
 
@@ -10,6 +40,14 @@ function load_extension(){
     refresher.addEventListener('click', function(){
         location.reload(true)
     })
+
+    printBatteryPercentage()
+
+    setInterval(function(){
+        printBatteryPercentage()
+    }, 60000)
+
+
 }
 
 (function(){

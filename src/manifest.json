@@ -5,6 +5,17 @@
   "description": "WiFi Strength - Battery Level - Refresh Button visualizer",
   "version": "0.0.1",
 
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "*://*/*"
+  ],
+
+  "background": {
+    "persistent": true,
+    "scripts": ["scripts/background.js"]
+  },
+
   "content_scripts": [
     {
       "matches": ["*://*/*"],
