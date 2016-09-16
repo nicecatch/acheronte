@@ -1,4 +1,4 @@
-# Acheronte
+# Full Screen Helper
 This is just a simple Chrome Extension that aims to help navigation when running Chrome on Kiosk mode with tablet/phone devices.
 
 ### Capability
