@@ -6,6 +6,7 @@
   "version": "0.0.1",
 
   "permissions": [
+    "networkingPrivate",
     "tabs",
     "webRequest",
     "*://*/*"
@@ -20,12 +21,13 @@
     {
       "matches": ["*://*/*"],
       "js": ["scripts/injector_script.js"],
-      "css": ["css/style.css"],
+      "css": ["css/style.css", "css/font-awesome.css"],
       "run_at": "document_idle"
     }
   ],
 
   "web_accessible_resources": [
-    "html/docker.html"
+    "html/*",
+    "fonts/*"
   ]
 }

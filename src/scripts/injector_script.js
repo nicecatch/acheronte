@@ -1,3 +1,11 @@
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
+    // Wifi Signal
+    if(request && request.WiFi) {
+        var battery_level = document.getElementById('wifi-icon')
+        battery_level.innerText = request.WiFi.SignalStrength + '.'
+    }
+})
+
 function getBatteryPromise() {
 	var battery=navigator.battery||navigator.webkitBattery||navigator.mozBattery;
 
@@ -16,14 +24,12 @@ function printBatteryPercentage() {
     var battery_level = document.getElementById('battery-icon')
 
     getBatteryPromise().then(function(battery) {
-        var text_to_append = ''
-        if(battery.dischargingTime == 'Infinity') {
-            text_to_append = 'No Battery'
-        } else {
-            text_to_append = battery.level * 100 + '%';
-        }   
-        
-	    battery_level.innerText = text_to_append
+        var level = (battery.level <= 1 ? battery.level : 1) * 100 / 20
+        var level_rouned = Math.round(level)
+        level_rouned = level_rouned > level ? level : level_rouned
+        // if rounded to superior unit decrease it
+        level_rouned = level_rouned == 5 ? 4 : level_rouned
+	    battery_level.innerHTML = '<i class="fa fa-battery-'+level_rouned+' fa-2x"></i>'
     });
 }
 

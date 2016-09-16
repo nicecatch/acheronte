@@ -1,5 +1,10 @@
 #docker-bar {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     right: 0;
+    margin: 5px;
+}
+
+#docker-bar > div {
+    display: inline-block;
 }
