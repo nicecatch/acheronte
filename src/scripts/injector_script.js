@@ -53,8 +53,6 @@ function load_extension(){
         location.reload(true)
     })
 
-    var img_battery =
-
     printBatteryPercentage()
 
     setInterval(function(){
