@@ -25,11 +25,17 @@ function printBatteryPercentage() {
 
     getBatteryPromise().then(function(battery) {
         var level = (battery.level <= 1 ? battery.level : 1) * 100 / 20
-        var level_rouned = Math.round(level)
-        level_rouned = level_rouned > level ? level : level_rouned
-        // if rounded to superior unit decrease it
-        level_rouned = level_rouned == 5 ? 4 : level_rouned
-	    battery_level.innerHTML = '<i class="fa fa-battery-'+level_rouned+' fa-2x"></i>'
+        var level_rounded = Math.round(level)
+        level_rounded = level_rounded > level ? level_rounded - 1 : level_rounded == 5 ? 4 : level_rounded
+        
+	    battery_level.className = 'fa fa-battery-'+level_rounded+' fa-4x'
+
+        if(battery.level<=0.15){
+            battery_level.parentElement.className = 'low-battery'
+        } else {
+            battery_level.parentElement.className = ''
+        }
+
     });
 }
 
@@ -42,10 +48,12 @@ function load_extension(){
 
     document.getElementsByTagName('body')[0].appendChild(div_dock)
     
-    var refresher = document.getElementById('refresh-icon')
+    var refresher = document.getElementById('refresh-container')
     refresher.addEventListener('click', function(){
         location.reload(true)
     })
+
+    var img_battery =
 
     printBatteryPercentage()
 

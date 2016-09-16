@@ -16,16 +16,10 @@ chrome.runtime.onMessage.addListener(
       if(sender.tab) {
           tab_to_signal.push(sender.tab.id)
       }
-    //console.log(sender.tab ?
-    //            "from a content script:" + sender.tab.url :
-    //            "from the extension");
-    //if (request.greeting == "hello")
-    //  sendResponse({farewell: "goodbye"});
   });
 
 
 var callback_webRequest = function (details_object) {
-    //if (details.frameId === 0) {
     setTimeout(function (){
         chrome.tabs.reload(details_object.tabId)
     }, 5000)
@@ -39,7 +33,7 @@ var filter_webRequest = {
 chrome.webRequest.onErrorOccurred.addListener(callback_webRequest, filter_webRequest)
 
 var callback_networks = function (networks) {
-    // network is an array - get first
+    // networks is an array - get first
     wifi_network = networks[0]
 }
 

@@ -7,4 +7,9 @@
 
 #docker-bar > div {
     display: inline-block;
+    margin: 5px;
+}
+
+#battery-color.low-battery{
+    color: red;
 }
