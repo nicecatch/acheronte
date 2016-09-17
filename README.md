@@ -12,6 +12,10 @@ Right now has just 3 functions:
 ### Usage
 Just install it through the store
 
+### Links
+[Chrome Web Store](https://chrome.google.com/webstore/detail/full-screen-helper/mddlbhffpgefnpfbhkgnnamkehepifnk "Chrome Web Store")
+[GitHub](https://github.com/nicecatch/acheronte "GitHub")
+
 ### Future
 *   Add settings page
 
