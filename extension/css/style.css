@@ -3,11 +3,16 @@
     bottom: 0;
     right: 0;
     margin: 5px;
+    z-index: 1000;
 }
 
 #docker-bar > div {
     display: inline-block;
     margin: 5px;
+}
+
+#docker-bar > div:not(:last-child) {
+    margin-right: 10px;
 }
 
 #battery-color.low-battery{

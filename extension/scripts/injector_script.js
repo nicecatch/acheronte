@@ -1,10 +1,11 @@
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
+
+/*chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
     // Wifi Signal
     if(request && request.WiFi) {
         var battery_level = document.getElementById('wifi-icon')
         battery_level.innerText = request.WiFi.SignalStrength + '.'
     }
-})
+})*/
 
 function getBatteryPromise() {
 	var battery=navigator.battery||navigator.webkitBattery||navigator.mozBattery;
@@ -25,12 +26,12 @@ function printBatteryPercentage() {
 
     getBatteryPromise().then(function(battery) {
         var level = (battery.level <= 1 ? battery.level : 1) * 100 / 20
-        var level_rounded = Math.round(level)
-        level_rounded = level_rounded > level ? level_rounded - 1 : level_rounded == 5 ? 4 : level_rounded
+        var level_rounded = Math.floor(level)
+        level_rounded = level_rounded == 5 ? 4 : level_rounded
         
 	    battery_level.className = 'fa fa-battery-'+level_rounded+' fa-4x'
 
-        if(battery.level<=0.15){
+        if(level_rounded==0){
             battery_level.parentElement.className = 'low-battery'
         } else {
             battery_level.parentElement.className = ''

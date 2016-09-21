@@ -40,7 +40,7 @@ var callback_networks = function (networks) {
 var filter_networks = {
     "networkType": "WiFi"
 }
-
+/*
 var wifi_network = null;
 
 function getWifiNetwork() {
@@ -66,3 +66,4 @@ setTimeout(function() {
 }, 5000)
 
 sendWifiStrength()
+*/
