@@ -1,11 +1,7 @@
-
-/*chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
-    // Wifi Signal
-    if(request && request.WiFi) {
-        var battery_level = document.getElementById('wifi-icon')
-        battery_level.innerText = request.WiFi.SignalStrength + '.'
-    }
-})*/
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    alert(request);
+  });
 
 function getBatteryPromise() {
 	var battery=navigator.battery||navigator.webkitBattery||navigator.mozBattery;
@@ -52,6 +48,16 @@ function load_extension(){
     var refresher = document.getElementById('refresh-container')
     refresher.addEventListener('click', function(){
         location.reload(true)
+    })
+
+    var panasonic = document.getElementById('panasonic-container')
+    panasonic.addEventListener('click', function(){
+
+        chrome.runtime.sendMessage({ recipient: "native", button_pressed: "panasonic"}, function(response) {
+            // do nothing, native app will not send message in response
+            //alert(response);
+        });
+
     })
 
     printBatteryPercentage()

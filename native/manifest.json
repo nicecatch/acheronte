@@ -1,7 +1,7 @@
 {
   "name": "it.tdt.host_application",
-  "description": "My Application",
-  "path": "C:\\Program Files\\My Application\\chrome_native_messaging_host.exe",
+  "description": "Host Application",
+  "path": "C:\\path\\to\\host_application.exe",
   "type": "stdio",
   "allowed_origins": [
     "chrome-extension://mddlbhffpgefnpfbhkgnnamkehepifnk/"
