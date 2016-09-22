@@ -1,0 +1,3 @@
+[submodule "native/src/json11"]
+	path = native/src/json11
+	url = https://github.com/dropbox/json11
