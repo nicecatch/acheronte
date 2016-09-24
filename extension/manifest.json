@@ -3,7 +3,7 @@
 
   "name": "Full Screen Helper",
   "description": "Battery Level, Refresh Button visualizer, Auto refresher on load error",
-  "version": "0.0.1",
+  "version": "0.0.4",
 
   "permissions": [
     "tabs",

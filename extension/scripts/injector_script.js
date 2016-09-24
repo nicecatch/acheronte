@@ -1,7 +1,13 @@
 chrome.runtime.onMessage.addListener(
-  function(request, sender, sendResponse) {
-    alert(request);
-  });
+    function(request, sender, sendResponse) {
+        // if(!request || request.error){
+        //     alert("Impossibile avviare l'applicazione")
+        // }
+
+        if(request.type == 'wifi' ) {
+            document.getElementById('wifi-icon').innerText = request.signal
+        }
+});
 
 function getBatteryPromise() {
 	var battery=navigator.battery||navigator.webkitBattery||navigator.mozBattery;
@@ -65,6 +71,12 @@ function load_extension(){
     setInterval(function(){
         printBatteryPercentage()
     }, 60000)
+    var request_wifi = {
+        recipient: 'add-wifi'
+    }
+    chrome.runtime.sendMessage(request_wifi, function(response) {
+        // No response
+    });
 
 
 }
