@@ -22,22 +22,35 @@ var filter_webRequest = {
     "types": ["main_frame"]
 }
 
-setInterval(function(){
+var advise_all = function(response) {
+    tab_to_signal.forEach(function(tabId, index, array){
+        send_wifi_value(response, tabId)
+    })
+}
+
+var get_wifi_value = function(callback) {
     var message_to_native = {
         tabId: 0,
         text: executables['wifi']
     }
+    var args_slices = [...arguments].slice(1)
     chrome.runtime.sendNativeMessage('it.tdt.host_application', message_to_native, function(response){
-        if(response && response.response) {
-            var wifi = {
-                type: "wifi",
-                signal: response.response
-            }
-            tab_to_signal.forEach(function(value, index, array){
-                chrome.tabs.sendMessage(value, wifi)
-            })                 
-        }
-    })
+        callback(response, ...args_slices)
+    })        
+
+}
+
+var send_wifi_value = function(response, tabId) {
+    var wifi = {
+        type: "wifi",
+        signal: response && response.response ? response.response : -1
+    }
+    chrome.tabs.sendMessage(tabId, wifi);
+}
+
+setInterval(function(){
+    get_wifi_value(advise_all);
+
 }, 5000)
       
 chrome.webRequest.onErrorOccurred.addListener(callback_webRequest_failed, filter_webRequest)
@@ -62,6 +75,7 @@ chrome.runtime.onMessage.addListener(
             }
             if(request.recipient == 'add-wifi'){
                 tab_to_signal.push(sender.tab.id)
+                get_wifi_value(send_wifi_value, sender.tab.id)
             } 
         }
     }
