@@ -21,7 +21,11 @@
 
   "background": {
     "persistent": true,
-    "scripts": ["scripts/background.js"]
+    "scripts": [
+      "scripts/native_manager.js",
+      "scripts/objects_manager.js",
+      "scripts/background.js"
+    ]
   },
 
   "content_scripts": [

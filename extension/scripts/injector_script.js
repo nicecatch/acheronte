@@ -59,9 +59,8 @@ function load_extension(){
     var panasonic = document.getElementById('panasonic-container')
     panasonic.addEventListener('click', function(){
 
-        chrome.runtime.sendMessage({ recipient: "native", button_pressed: "panasonic"}, function(response) {
+        chrome.runtime.sendMessage({ recipient: "native", button_pressed: "touch"}, function(response) {
             // do nothing, native app will not send message in response
-            //alert(response);
         });
 
     })
