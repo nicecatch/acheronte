@@ -1,0 +1,1 @@
+(netsh wlan show interfaces) -Match '^\s+Segnal' -Replace '^\s+Segnale\s+:\s+','' -Replace '\%.*$',''
