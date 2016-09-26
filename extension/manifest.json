@@ -39,6 +39,7 @@
 
   "web_accessible_resources": [
     "html/*",
-    "fonts/*"
+    "fonts/*",
+    "images/wifi/*"
   ]
 }

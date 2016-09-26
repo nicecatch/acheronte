@@ -29,11 +29,12 @@ class WifiManager extends BaseManager {
     constructor(manager) {
         super(manager)
         this.tab_to_signal = []
+        var self = this
 
         chrome.tabs.onRemoved.addListener(function (tabId) {
-            var index = this.tab_to_signal.indexOf(tabId)
+            var index = self.tab_to_signal.indexOf(tabId)
             if(index >= 0) {
-                this.tab_to_signal.splice(index, 1)
+                self.tab_to_signal.splice(index, 1)
             }
         });
 

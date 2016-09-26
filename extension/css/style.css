@@ -18,3 +18,27 @@
 #battery-color.low-battery{
     color: red;
 }
+
+i.wifi-0 {
+    content: url('chrome-extension://__MSG_@@extension_id__/images/wifi/wifi_0.png')
+}
+
+i.wifi-1 {
+    content: url('chrome-extension://__MSG_@@extension_id__/images/wifi/wifi_1.png')
+}
+
+i.wifi-1-red {
+    content: url('chrome-extension://__MSG_@@extension_id__/images/wifi/wifi_1_red.png')
+}
+
+i.wifi-2 {
+    content: url('chrome-extension://__MSG_@@extension_id__/images/wifi/wifi_2.png')
+}
+
+i.wifi-3 {
+    content: url('chrome-extension://__MSG_@@extension_id__/images/wifi/wifi_3.png')
+}
+
+i.wifi-4 {
+    content: url('chrome-extension://__MSG_@@extension_id__/images/wifi/wifi_4.png')
+}

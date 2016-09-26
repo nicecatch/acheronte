@@ -5,7 +5,23 @@ chrome.runtime.onMessage.addListener(
         // }
 
         if(request.type == 'wifi' ) {
-            document.getElementById('wifi-icon').innerText = request.signal
+            var i_element = document.getElementById('wifi-signal-icon')
+            var value = parseInt(request.signal)
+            //document.getElementById('wifi-icon').innerText = request.signal
+            var class_name = 'wifi-'
+            if(isNaN(value) || value == -1) {
+                class_name += '0' 
+            }
+            else {
+                var level = Math.floor(value / 25) + 1 
+                level = level == 5 ? 4 : level
+                class_name += level.toString()
+                
+                if(value <= 15) {
+                    class_name += '-red'
+                }
+            }
+            i_element.className = class_name
         }
 });
 
@@ -19,7 +35,7 @@ function getBatteryPromise() {
 		return navigator.getBattery();
 	}
 
-	return new Promise(function(resolve, reject) { resolve({}); } );
+	return new Promise(function(resolve, reject) { reject({}); } );
 }
 
 function printBatteryPercentage() {
