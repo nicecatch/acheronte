@@ -1,6 +1,3 @@
-[submodule "native/src/json11"]
-	path = native/src/json11
-	url = https://github.com/dropbox/json11
 [submodule "native/src/SimpleJSON"]
 	path = native/src/SimpleJSON
 	url = https://github.com/nbsdx/SimpleJSON
