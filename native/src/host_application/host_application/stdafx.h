@@ -10,6 +10,16 @@
 #include <stdio.h>
 #include <tchar.h>
 
+#include <iostream>
+#include <string>
 
+#include <fcntl.h>
+#include <io.h>
+
+#include <stdio.h>
+#include <Windows.h>
+#include <limits.h>
+
+#include <list>
 
 // TODO: fare riferimento qui alle intestazioni aggiuntive richieste dal programma

@@ -3,7 +3,7 @@
 
   "name": "Full Screen Helper",
   "description": "Battery Level, Refresh Button visualizer, Auto refresher on load error",
-  "version": "0.0.4",
+  "version": "0.0.6",
 
   "permissions": [
     "tabs",
@@ -22,8 +22,9 @@
   "background": {
     "persistent": true,
     "scripts": [
-      "scripts/native_manager.js",
-      "scripts/objects_manager.js",
+      "scripts/background/native_manager.js",
+      "scripts/background/objects_manager.js",
+      "scripts/background/dispatcher.js",
       "scripts/background.js"
     ]
   },

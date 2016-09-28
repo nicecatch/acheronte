@@ -1,3 +1,0 @@
-[submodule "native/src/SimpleJSON"]
-	path = native/src/SimpleJSON
-	url = https://github.com/nbsdx/SimpleJSON

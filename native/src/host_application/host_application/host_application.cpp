@@ -1,29 +1,10 @@
 // host_application.cpp : definisce il punto di ingresso dell'applicazione console.
-// Lib for reading Chrome data
-#include <iostream>
-#include <string>
-
-//#ifdef WIN32
-// Lib to set stdin to binary
-#include <fcntl.h>
-#include <io.h>
-//#endif
-
-// Lib for writing console debugging output
-#include <fstream>
-
-// Lib for _popen
-#include <stdio.h>
-#include <Windows.h>
-#include <process.h>
-
-// Lib for reading and parsing json
-#include <json.hpp>
-
-
-#include <limits.h>
 
 #include "stdafx.h"
+
+#include "json.hpp"
+#include "configmanager.hpp"
+#include "registrymanager.hpp"
 
 using namespace std;
 
@@ -44,14 +25,6 @@ int main()
 
 		cin.read((char *)&length, SIZE_LENGTH);
 
-		////read message length
-		//for (int i = 0; i < SIZE_LENGTH; i++)
-		//{
-		//	
-		//	unsigned int read_char = getchar();
-		//	length = length | (read_char << i * 8);
-		//}
-
 		if (length == 0)
 		{
 			return 0;
@@ -69,27 +42,49 @@ int main()
 		}
 
 		json::JSON parsed_message_json = json::JSON::Load(msg), response_message_json;
-		string command = (parsed_message_json["text"]).ToString();
 
-		FILE* pipeFile;
-
-		if ((pipeFile = _popen(command.c_str(), "r")) == NULL)
+		if ((parsed_message_json["type"]).ToString().compare("get_config"))
 		{
-			response_message_json["error"] = "Cannot open pipe";
-		}
-		else
-		{
-			char buffer_array[1024];
-			string response;
-
-			while (!feof(pipeFile))
+			ConfigManager configManager;
+			if (configManager.getResult() == ERROR_SUCCESS)
 			{
-				if (fgets(buffer_array, 1024, pipeFile) != NULL)
-					response += buffer_array;
+				json::JSON list_configuration = json::Array();
+				list<string> cl = configManager.getConfig();
+				for (string n : cl)
+				{
+					list_configuration.append(json::JSON::Load(n));
+				}
+				response_message_json["response"] = list_configuration;
 			}
-
-			response_message_json["response"] = response;
+			else
+			{
+				response_message_json["error"] = "Cannot open configuration";
+			}
 		}
+		else if ((parsed_message_json["type"]).ToString().compare("execute_command"))
+		{
+			string command = (parsed_message_json["text"]).ToString();
+
+			FILE* pipeFile;
+
+			if ((pipeFile = _popen(command.c_str(), "r")) == NULL)
+			{
+				response_message_json["error"] = "Cannot open pipe";
+			}
+			else
+			{
+				char buffer_array[1024];
+				string response;
+
+				while (!feof(pipeFile))
+				{
+					if (fgets(buffer_array, 1024, pipeFile) != NULL)
+						response += buffer_array;
+				}
+
+				response_message_json["response"] = response;
+			}
+		}		
 
 		// send back values that identify request
 		response_message_json["tabId"] = parsed_message_json["tabId"];
