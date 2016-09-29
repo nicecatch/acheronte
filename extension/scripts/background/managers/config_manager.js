@@ -28,7 +28,7 @@ class ConfigManager extends BaseManager {
                 result.push(...property.get_config())
             }
         }
-        
+        return result;
     }
 
     // La host application mi sta inviando la configurazione

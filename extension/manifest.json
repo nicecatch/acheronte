@@ -34,7 +34,7 @@
       "matches": ["*://*/*"],
       "js": ["scripts/injector_script.js"],
       "css": ["css/style.css", "css/font-awesome.css"],
-      "run_at": "document_idle"
+      "run_at": "document_start"
     }
   ],
 

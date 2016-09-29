@@ -1,4 +1,4 @@
-#docker-bar {
+#dockbar {
     position: fixed;
     bottom: 0;
     right: 0;
@@ -6,12 +6,12 @@
     z-index: 1000;
 }
 
-#docker-bar > div {
+#dockbar > div {
     display: inline-block;
     margin: 5px;
 }
 
-#docker-bar > div:not(:last-child) {
+#dockbar > div:not(:last-child) {
     margin-right: 10px;
 }
 

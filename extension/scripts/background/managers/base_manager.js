@@ -19,7 +19,7 @@ class BaseManager{
     }
 
     send_message(opt){
-        this.router.send_message(this.constructor.get_request(opt))
+        this.router.send_message(this.constructor._get_request(opt))
     }
 
     callback_from_extension() {
