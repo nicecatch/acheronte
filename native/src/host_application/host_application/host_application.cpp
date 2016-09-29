@@ -16,21 +16,25 @@ int main()
 	if (_setmode(_fileno(stdin), _O_BINARY) + _setmode(_fileno(stdout), _O_BINARY) < 0)
 	{
 		// cannot set stdin or stoud to binary, exit with error
+		// required as stated by chrome extension documentation
 		return 1;
 	}
 
 	while (1)
-	{
+	{	
+		// the first 4 bytes represent the length of the message
 		unsigned int length = 0;
 
 		cin.read((char *)&length, SIZE_LENGTH);
 
 		if (length == 0)
 		{
+			// Useful?
 			return 0;
 		}
 		else if (length == ULONG_MAX)
 		{
+			// if they are all '1's chrome has no message to send (fake read)
 			continue;
 		}
 
@@ -87,13 +91,18 @@ int main()
 		}		
 
 		// send back values that identify request
+		// tabId identifies the tab that has sent the message
 		response_message_json["tabId"] = parsed_message_json["tabId"];
+		
+		// requestType identifies the button (it's the value <name> )
 		response_message_json["requestType"] = parsed_message_json["requestType"];
 
 		string message_to_send = response_message_json.dump(1, "");
 		unsigned int len = message_to_send.length();
 
+		// send back the length as 4 bytes
 		cout.write((char*)&len, 4);
+		// send message 
 		cout.write(message_to_send.c_str(), len);
 	}
 

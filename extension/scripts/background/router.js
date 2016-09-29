@@ -1,8 +1,9 @@
 class MessageListenerCallbacks {
-    constructor(name, callback_from_extension, callback_from_native){
-        this.name = name;
-        this.callback_from_extension = callback_from_extension;
-        this.callback_from_native = callback_from_native;
+    constructor(name, self, callback_from_extension, callback_from_native){
+        this.name = name
+        this.self = self
+        this.callback_from_extension = callback_from_extension
+        this.callback_from_native = callback_from_native
     }
 }
 
@@ -11,30 +12,24 @@ class Router {
         this.host_application = host_application
         this.message_listeners = {}
 
+        /*
+         Messaggio dall'estensione - È stato fatto click su un pulsante
+        */
         chrome.runtime.onMessage.addListener(
             function(request, sender, sendResponse) {
-                if(request && this.message_listeners[request.name]) {
+                if(request && request.name && this.message_listeners[request.name]) {
                     var response = {
                         request: request,
                         sender: sender,
                         sendResponse: sendResponse
                     }
-                    // SEND SOMETHING
+                    this.message_listeners[request.name].forEach(function(listener, index, array){
+                        // Eseguo la funzione che manda all'applicazione host un messaggio
+                        listner.callback_from_extension.call(listner.self, response)
+                    })
                 }
-                // if(request){
-                //     if(request.recipient == 'native'){
-                //         if(request.button_pressed == 'touch') {
-                //             touchManager.send_message()
-                //         }
-                //     }
-                //     if(request.recipient == 'add-wifi'){
-                //         wifiManager.tab_to_signal.push(sender.tab.id)
-                //         get_wifi_value(sender.tab.id)
-                //     } 
-                // }
             }
         )
-
     }
 
     _get_port(){
@@ -45,6 +40,10 @@ class Router {
                     self._port = chrome.runtime.connectNative(self.host_application);
 
                     self._port.onMessage.addListener(function(message) {
+                        /*
+                            Messaggio dalla host application 
+                            Sta inviando dei dati indietro all'estensione
+                        */
                         if(!message || !message.requestType)
                             return;
                         self._alert(message)
@@ -58,20 +57,21 @@ class Router {
     _alert(message) {
         if(this.message_listeners[message.requestType]){
             this.message_listeners[message.requestType].forEach(function(listener, index, array){
+                // Inoltro il messaggio al(/ai) chiamante(/i)
                 if(listener)
-                    listener.manage_callback(message)
+                    listener.callback_from_native.call(listener.self, message)
             })
         }
     }
 
-    add_listener(requestType, caller) {
-        if(!requestType || requestType == "") {
+    add_listener(mlcs) {
+        if(!mlcs || !mlcs.name || mlcs.name == "") {
             return; // fail silently?
         }
-        if(!this.message_listeners[requestType]) {
-            this.message_listeners[requestType] = []
+        if(!this.message_listeners[mlcs.name]) {
+            this.message_listeners[mlcs.name] = []
         }
-        this.message_listeners[requestType].push(caller)
+        this.message_listeners[mlcs.name].push(mlcs)
     }
 
     send_message(object) {

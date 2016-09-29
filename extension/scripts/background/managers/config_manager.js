@@ -2,11 +2,13 @@ class DispatcherList {
     constructor(router) {
         this._managerDispatcherList = {
             0: InternalDispatcher(router),
-            1: NativeDispatcher(router)
+            1: ExternalDispatcher(router)
         }
     }
 
     getDispatcher(num) {
+        if(!num)
+            return this._managerDispatcherList
         return this._managerDispatcherList[num];
     }
 }
@@ -17,11 +19,24 @@ class ConfigManager extends BaseManager {
         this._dispatcherList = DispatcherList(router) 
     }
     
-    manage_callback(parameters) {
-        // dentro parameters.response ho la lista di oggeti che configurano la dockbar
+    // Una pagina sta richiedendo la configurazione
+    callback_from_extension(parameters) {
+        var result = []
+        for(property in this._dispatcherList.getDispatcher()) {
+
+            if(this._managerDispatcherList.hasOwnProperty(property)) {
+                result.push(...property.get_config())
+            }
+        }
+        
+    }
+
+    // La host application mi sta inviando la configurazione
+    callback_from_native(parameters) {
+        // dentro parameters.response ho la lista di oggetti che configurano la dockbar
         if(parameters && parameters.response) {
             for(elem in parameters) {
-                _dispatcherList.getDispatcher(elem.response.type).resolve(elem)
+                this._dispatcherList.getDispatcher(elem.response.type).resolve(elem)
             }
         }
     }
