@@ -16,7 +16,7 @@ class DispatcherList {
 class ConfigManager extends BaseManager {
     constructor(router) {
         super(router)
-        this._dispatcherList = DispatcherList(router) 
+        this._dispatcherList = new DispatcherList(router)
     }
     
     // Una pagina sta richiedendo la configurazione

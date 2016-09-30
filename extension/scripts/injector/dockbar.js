@@ -9,21 +9,17 @@ class Dockbar {
         this._dockbar = this._document.createElement('div')
         this._dockbar.id = "dockbar"
 
-        var page_body =  this._document.getElementsByTagName('body')
+        var page_body = this._document.getElementsByTagName('body')
 
-        if(page_body.firstChild) {
-            page_body.insertBefore(this._dockbar,page_body.firstChild)
+        if (page_body.firstChild) {
+            page_body.insertBefore(this._dockbar, page_body.firstChild)
         }
         else {
             page_body.appendChild(this._dockbar)
-        } 
+        }
     }
 
     add_element(element) {
         this._dockbar.appendChild(element.draw_element())
     }
 }
-
-var dockbar = Dockbar(document)
-
-

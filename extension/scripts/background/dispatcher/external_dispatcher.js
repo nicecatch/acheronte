@@ -16,7 +16,7 @@ class ExternalDispatcher extends BaseDispatcher {
         this._dirty_config = true
         this._elements_registered[parameter.response.name] = parameter // salvo l'intero elemento inviato dalla host application
         
-        var mlc = MessageListenerCallbacks(
+        var mlc = new MessageListenerCallbacks(
             parameter.response.name, // name
 
             this,
@@ -24,9 +24,9 @@ class ExternalDispatcher extends BaseDispatcher {
             function(response) { // from extension
                 var msg = {
                     type: "execute_command",
-                    tabId: response.tab.id,
-                    requestType: parameter.response.name,
-                    text: parameter.response.value,
+                    tabId: response.sender.tab.id,
+                    name: parameter.response.name,
+                    command: parameter.response.value,
                 }
                 this.router.send_message(msg)
             }, 
@@ -36,10 +36,10 @@ class ExternalDispatcher extends BaseDispatcher {
                     var msg = {
                         type: response.type,
                         tabId: response.tabId,
-                        requestType: response.requestType,
+                        name: response.name,
                         response: response.response
                     }
-                    chrome.tabs.sendMessage(response.tabId, msg);  
+                    chrome.tabs.sendMessage(msg.tabId, msg);  
                 }
             }
         )
@@ -53,7 +53,7 @@ class ExternalDispatcher extends BaseDispatcher {
                     this._config.push({
                         // All'estensione interessa unicamente il nome del bottone 
                         // e il nome dell'icona corrispondente per le font awesome
-                        requestType: element.response.name,
+                        name: element.response.name,
                         icon: element.response.icon
                     })
                 }

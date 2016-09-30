@@ -5,7 +5,7 @@ class DockbarElement {
 
     }
 
-    _get_interal_element() {
+    _get_internal_element() {
         // override this
         return null
     }
@@ -16,7 +16,7 @@ class DockbarElement {
 
     draw_element () {
         var button = this.get_container()
-        button.appendChild(_get_interal_element())
+        button.appendChild(this._get_internal_element())
         return button
     }
 

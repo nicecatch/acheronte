@@ -5,7 +5,7 @@ class GenericElement extends DockbarElement() {
         this._router = router
     }
 
-    _get_interal_element () {
+    _get_internal_element () {
         var image = this._document.createElement('i')
 
         image.className = "fa fa-" + this._icon +" fa-4x" 

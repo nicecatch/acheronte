@@ -67,7 +67,7 @@ int main()
 		}
 		else if ((parsed_message_json["type"]).ToString().compare("execute_command"))
 		{
-			string command = (parsed_message_json["text"]).ToString();
+			string command = (parsed_message_json["command"]).ToString();
 
 			FILE* pipeFile;
 
@@ -94,8 +94,11 @@ int main()
 		// tabId identifies the tab that has sent the message
 		response_message_json["tabId"] = parsed_message_json["tabId"];
 		
-		// requestType identifies the button (it's the value <name> )
-		response_message_json["requestType"] = parsed_message_json["requestType"];
+		// name identifies the button
+		response_message_json["name"] = parsed_message_json["name"];
+
+		// type is either get_config or execute_command
+		response_message_json["type"] = parsed_message_json["type"];
 
 		string message_to_send = response_message_json.dump(1, "");
 		unsigned int len = message_to_send.length();

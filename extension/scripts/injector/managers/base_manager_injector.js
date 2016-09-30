@@ -1,7 +1,7 @@
 class BaseManager{
     constructor(router){
         this.router = router
-        var mlc = MessageListenerCallbacks(
+        var mlc = new MessageListenerCallbacks(
             this.constructor.getRequestType(), 
             this, 
             callback_from_native)

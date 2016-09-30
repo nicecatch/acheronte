@@ -19,7 +19,7 @@ class InternalDispatcher extends BaseDispatcher {
     constructor(router) {
         super(router)
         
-        this._internalHandlerList = InternalHandlerList()
+        this._internalHandlerList = new InternalHandlerList()
         this._elements_registered = {}
         this._config = []
         this._dirty_config = true
@@ -34,25 +34,25 @@ class InternalDispatcher extends BaseDispatcher {
         if(this._internalHandlerList.get_handler(parameter.response.name))
         {
             // salvo l'intero elemento inviato dalla host application
-            this._elements_registered[parameter.response.name] = this._internalHandlerList.get_handler(parameter.response.name)()
+            this._elements_registered[parameter.response.name] = new this._internalHandlerList.get_handler(parameter.response.name)()
 
             var callback_from_extension = null
 
             // Aggiungo la risposta solo se il bottone ha necessità di inviare un comando alla host application
-            if(this._elements_registered[parameter.response.name].get_command() != '')
+            if(this._elements_registered[parameter.response.name] && this._elements_registered[parameter.response.name].get_command() != '')
             {
                 callback_from_extension = function(response) {
                     var msg = {
                         type: "execute_command",
                         tabId: response.tab.id,
-                        requestType: parameter.response.name,
-                        text: this._elements_registered[parameter.response.name].get_command(),
+                        name: parameter.response.name,
+                        command: this._elements_registered[parameter.response.name].get_command(),
                     }
                     this.router.send_message(msg)
                 }
             }
 
-            var mlc = MessageListenerCallbacks(
+            var mlc = new MessageListenerCallbacks(
                 parameter.response.name, // name
 
                 this,
@@ -64,7 +64,7 @@ class InternalDispatcher extends BaseDispatcher {
                         var msg = {
                             type: response.type,
                             tabId: response.tabId,
-                            requestType: response.requestType,
+                            name: response.name,
                             response: response.response
                         }
                         chrome.tabs.sendMessage(response.tabId, msg);  
@@ -73,5 +73,20 @@ class InternalDispatcher extends BaseDispatcher {
             )
             this._router.add_listener(mlc)
         }
+    }
+
+    get_config() {
+        if(this._dirty_config) {
+            for(element in this._elements_registered) {
+                if(this._elements_registered.hasOwnProperty(element)) {
+                    this._config.push({
+                        // All'estensione interessa unicamente il nome del bottone
+                        name: element.response.name
+                    })
+                }
+            }
+            this._dirty_config = false
+        }
+        return this._config
     }
 }

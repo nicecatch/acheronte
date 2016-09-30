@@ -1,12 +1,3 @@
-class MessageListenerCallbacks {
-    constructor(name, self, callback_from_extension, callback_from_native){
-        this.name = name
-        this.self = self
-        this.callback_from_extension = callback_from_extension
-        this.callback_from_native = callback_from_native
-    }
-}
-
 class Router {
     constructor(host_application){
         this.host_application = host_application
@@ -32,7 +23,7 @@ class Router {
         )
     }
 
-    _get_port(){
+    _get_port() {
         var self = this;
         return new Promise(
             function(resolve, reject) {
@@ -56,7 +47,7 @@ class Router {
 
     _alert(message) {
         if(this.message_listeners[message.requestType]){
-            this.message_listeners[message.requestType].forEach(function(listener, index, array){
+            this.message_listeners[message.requestType].forEach(function(listener){
                 // Inoltro il messaggio al(/ai) chiamante(/i)
                 if(listener)
                     listener.callback_from_native.call(listener.self, message)
