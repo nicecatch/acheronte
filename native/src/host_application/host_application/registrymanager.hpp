@@ -5,7 +5,7 @@
 
 using namespace std;
 
-#define SIZE_DEEFAULT 512
+#define SIZE_DEEFAULT 2048
 
 class RegistryManager {
 public:
@@ -15,6 +15,5 @@ public:
 
 private:
 	HKEY hKey;
-	BYTE data[SIZE_DEEFAULT];
 	DWORD szsize;
 };

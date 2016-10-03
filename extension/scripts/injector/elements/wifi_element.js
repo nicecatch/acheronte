@@ -1,4 +1,4 @@
-class ReloaderElement extends DockbarElement {
+class WifiElement extends DockbarElement {
     constructor(page_document) {
         super(page_document, 'wifi')
     }

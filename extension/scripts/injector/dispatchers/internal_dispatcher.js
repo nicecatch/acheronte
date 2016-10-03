@@ -30,7 +30,7 @@ class InternalDispatcher extends BaseDispatcher {
         if(this._internalMakerList.get_handler(parameter.response.name))
         {
             // salvo l'intero elemento inviato dalla host application
-            var makerElement = new this._internalMakerList.get_handler(parameter.response.name)()
+            var makerElement = new (this._internalMakerList.get_handler(parameter.response.name))()
             this.router.add_element(makerElement.create(this._document))
             this._elements_registered[parameter.response.name] = makerElement
 

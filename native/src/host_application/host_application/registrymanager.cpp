@@ -14,8 +14,9 @@ LONG RegistryManager::OpenKey(HKEY openKey, LPCSTR regkey) {
 LONG RegistryManager::GetValue(LPCSTR keyName, string &returnValue) {
 
 	DWORD dwType;
+	BYTE data[SIZE_DEEFAULT];
 
-	LONG result = RegGetValue(hKey, NULL, keyName, RRF_RT_ANY, &dwType, data, &szsize);
+	LONG result = RegGetValue(hKey, NULL, keyName, KEY_WOW64_64KEY | RRF_RT_ANY, &dwType, data, &szsize);
 
 	if (result == ERROR_SUCCESS)
 	{

@@ -9,7 +9,7 @@ class Dockbar {
         this._dockbar = this._document.createElement('div')
         this._dockbar.id = "dockbar"
 
-        var page_body = this._document.getElementsByTagName('body')
+        var page_body = this._document.getElementsByTagName('body')[0]
 
         if (page_body.firstChild) {
             page_body.insertBefore(this._dockbar, page_body.firstChild)

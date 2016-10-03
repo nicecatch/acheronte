@@ -1,4 +1,4 @@
-class GenericElement extends DockbarElement() {
+class GenericElement extends DockbarElement {
     constructor(params, document, router) {
         super(params.name, document)
         this._icon = params.icon

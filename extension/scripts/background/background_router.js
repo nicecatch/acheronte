@@ -6,17 +6,19 @@ class Router {
         /*
          Messaggio dall'estensione - È stato fatto click su un pulsante
         */
+
+        var self = this
         chrome.runtime.onMessage.addListener(
             function(request, sender, sendResponse) {
-                if(request && request.name && this.message_listeners[request.name]) {
+                if(request && request.name && self.message_listeners[request.name]) {
                     var response = {
                         request: request,
                         sender: sender,
                         sendResponse: sendResponse
                     }
-                    this.message_listeners[request.name].forEach(function(listener, index, array){
+                    self.message_listeners[request.name].forEach(function(listener){
                         // Eseguo la funzione che manda all'applicazione host un messaggio
-                        listner.callback_from_extension.call(listner.self, response)
+                        listener.callback_from_extension.call(listener.self, response)
                     })
                 }
             }
@@ -35,7 +37,7 @@ class Router {
                             Messaggio dalla host application 
                             Sta inviando dei dati indietro all'estensione
                         */
-                        if(!message || !message.requestType)
+                        if(!message)
                             return;
                         self._alert(message)
                     });
@@ -46,8 +48,8 @@ class Router {
     }
 
     _alert(message) {
-        if(this.message_listeners[message.requestType]){
-            this.message_listeners[message.requestType].forEach(function(listener){
+        if(this.message_listeners[message.name]){
+            this.message_listeners[message.name].forEach(function(listener){
                 // Inoltro il messaggio al(/ai) chiamante(/i)
                 if(listener)
                     listener.callback_from_native.call(listener.self, message)

@@ -14,10 +14,10 @@ class ExternalDispatcher extends BaseDispatcher {
     
     resolve_request(parameter) {
         this._dirty_config = true
-        this._elements_registered[parameter.response.name] = parameter // salvo l'intero elemento inviato dalla host application
+        this._elements_registered[parameter.name] = parameter // salvo l'intero elemento inviato dalla host application
         
         var mlc = new MessageListenerCallbacks(
-            parameter.response.name, // name
+            parameter.name, // name
 
             this,
 
@@ -25,8 +25,8 @@ class ExternalDispatcher extends BaseDispatcher {
                 var msg = {
                     type: "execute_command",
                     tabId: response.sender.tab.id,
-                    name: parameter.response.name,
-                    command: parameter.response.value,
+                    name: parameter.name,
+                    command: parameter.value,
                 }
                 this.router.send_message(msg)
             }, 
@@ -48,13 +48,14 @@ class ExternalDispatcher extends BaseDispatcher {
 
     get_config() {
         if(this._dirty_config) {
-            for(element in this._elements_registered) {
+            for(var element in this._elements_registered) {
                 if(this._elements_registered.hasOwnProperty(element)) {
                     this._config.push({
                         // All'estensione interessa unicamente il nome del bottone 
                         // e il nome dell'icona corrispondente per le font awesome
-                        name: element.response.name,
-                        icon: element.response.icon
+                        type: "1",
+                        name: this._elements_registered[element].name,
+                        icon: this._elements_registered[element].icon
                     })
                 }
             }

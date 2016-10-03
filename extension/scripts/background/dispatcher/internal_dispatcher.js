@@ -31,29 +31,29 @@ class InternalDispatcher extends BaseDispatcher {
 
     resolve_request(parameter) {
         this._dirty_config = true
-        if(this._internalHandlerList.get_handler(parameter.response.name))
+        if(this._internalHandlerList.get_handler(parameter.name))
         {
             // salvo l'intero elemento inviato dalla host application
-            this._elements_registered[parameter.response.name] = new this._internalHandlerList.get_handler(parameter.response.name)()
+            this._elements_registered[parameter.name] = new (this._internalHandlerList.get_handler(parameter.name))()
 
             var callback_from_extension = null
 
             // Aggiungo la risposta solo se il bottone ha necessità di inviare un comando alla host application
-            if(this._elements_registered[parameter.response.name] && this._elements_registered[parameter.response.name].get_command() != '')
+            if(this._elements_registered[parameter.name] && this._elements_registered[parameter.name].get_command() != '')
             {
                 callback_from_extension = function(response) {
                     var msg = {
                         type: "execute_command",
                         tabId: response.tab.id,
-                        name: parameter.response.name,
-                        command: this._elements_registered[parameter.response.name].get_command(),
+                        name: parameter.name,
+                        command: this._elements_registered[parameter.name].get_command(),
                     }
                     this.router.send_message(msg)
                 }
             }
 
             var mlc = new MessageListenerCallbacks(
-                parameter.response.name, // name
+                parameter.name, // name
 
                 this,
 
@@ -77,11 +77,12 @@ class InternalDispatcher extends BaseDispatcher {
 
     get_config() {
         if(this._dirty_config) {
-            for(element in this._elements_registered) {
+            for(var element in this._elements_registered) {
                 if(this._elements_registered.hasOwnProperty(element)) {
                     this._config.push({
                         // All'estensione interessa unicamente il nome del bottone
-                        name: element.response.name
+                        type: "0",
+                        name: this._elements_registered[element].get_name()
                     })
                 }
             }

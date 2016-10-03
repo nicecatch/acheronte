@@ -5,15 +5,16 @@ class Router {
         /*
          Messaggio dal background - Arriva una risposta
         */
+        var self = this
         chrome.runtime.onMessage.addListener(
             function(request, sender, sendResponse) {
-                if(request && request.name && this.message_listeners[request.name]) {
+                if(request && request.name && self.message_listeners[request.name]) {
                     var response = {
                         request: request,
                         sender: sender,
                         sendResponse: sendResponse
                     }
-                    this.message_listeners[request.name].forEach(function(listener){
+                    self.message_listeners[request.name].forEach(function(listener){
                         // Eseguo la funzione che spedisce all'elemento il messaggio proveniente dal background
                         listener.callback_from_background.call(listener.self, response)
                     })

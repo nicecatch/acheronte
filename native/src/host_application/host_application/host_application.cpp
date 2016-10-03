@@ -2,6 +2,9 @@
 
 #include "stdafx.h"
 
+#include <iostream>
+#include <fstream>
+
 #include "json.hpp"
 #include "configmanager.hpp"
 #include "registrymanager.hpp"
@@ -12,7 +15,8 @@ const int SIZE_LENGTH = 4;
 
 int main() 
 {
-	
+	//ofstream mystream;
+	//mystream.open("example.txt", ios::out | ios::app);
 	if (_setmode(_fileno(stdin), _O_BINARY) + _setmode(_fileno(stdout), _O_BINARY) < 0)
 	{
 		// cannot set stdin or stoud to binary, exit with error
@@ -47,25 +51,33 @@ int main()
 
 		json::JSON parsed_message_json = json::JSON::Load(msg), response_message_json;
 
-		if ((parsed_message_json["type"]).ToString().compare("get_config"))
+		//mystream << "parsed_message_json[\"type\"]" << parsed_message_json["type"].ToString() << endl;
+		if ((parsed_message_json["type"]).ToString().compare("get_config") == 0)
 		{
 			ConfigManager configManager;
 			if (configManager.getResult() == ERROR_SUCCESS)
 			{
+				//mystream << "configmanager.getresult() \n";
 				json::JSON list_configuration = json::Array();
 				list<string> cl = configManager.getConfig();
+				//int i = 0;
 				for (string n : cl)
 				{
-					list_configuration.append(json::JSON::Load(n));
+					//response_message_json[to_string(i)] = json::JSON::Load(n);
+					json::JSON x = json::JSON::Load(n);
+					list_configuration.append(x);
+					//i += 1;
 				}
+				//response_message_json["response"] = json::Array(list_configuration);
 				response_message_json["response"] = list_configuration;
 			}
 			else
 			{
+				
 				response_message_json["error"] = "Cannot open configuration";
 			}
 		}
-		else if ((parsed_message_json["type"]).ToString().compare("execute_command"))
+		else if ((parsed_message_json["type"]).ToString().compare("execute_command") == 0)
 		{
 			string command = (parsed_message_json["command"]).ToString();
 
@@ -100,7 +112,10 @@ int main()
 		// type is either get_config or execute_command
 		response_message_json["type"] = parsed_message_json["type"];
 
-		string message_to_send = response_message_json.dump(1, "");
+		string message_to_send = response_message_json.dump(0,"");
+
+		//mystream << message_to_send << endl << response_message_json << endl;
+		
 		unsigned int len = message_to_send.length();
 
 		// send back the length as 4 bytes
@@ -108,6 +123,6 @@ int main()
 		// send message 
 		cout.write(message_to_send.c_str(), len);
 	}
-
+	//mystream.close();
 	return 0;
 }

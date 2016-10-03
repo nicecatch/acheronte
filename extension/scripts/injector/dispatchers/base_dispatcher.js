@@ -4,7 +4,7 @@ class BaseDispatcher {
         this._document = document
     }
 
-    resolve(parameters) {
+    resolve_request(parameters) {
         this.resolve_request(parameters)
     }
 }
