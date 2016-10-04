@@ -10,5 +10,7 @@ class ReloaderElement extends DockbarElement {
         image.addEventListener('click', function() {
             location.reload(true)
         })
+
+        return image
     }
 }

@@ -1,5 +1,6 @@
 class Router {
-    constructor(){
+    constructor(dockbar){
+        this._dockbar = dockbar
         this.message_listeners = {}
 
         /*
@@ -21,6 +22,10 @@ class Router {
                 }
             }
         )
+    }
+
+    get_dockbar() {
+        return this._dockbar
     }
 
     add_listener(mlcs) {

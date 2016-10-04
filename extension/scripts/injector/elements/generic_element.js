@@ -1,8 +1,7 @@
 class GenericElement extends DockbarElement {
-    constructor(params, document, router) {
+    constructor(document, params) {
         super(params.name, document)
         this._icon = params.icon
-        this._router = router
     }
 
     _get_internal_element () {
@@ -15,5 +14,4 @@ class GenericElement extends DockbarElement {
             self._router.send_message({ name: self.get_name() })
         })
     }
-
 }

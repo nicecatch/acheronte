@@ -14,10 +14,14 @@ class DockbarElement {
         return this._name
     }
 
-    draw_element () {
+    create () {
         var button = this.get_container()
         button.appendChild(this._get_internal_element())
         return button
+    }
+
+    handle_response () {
+        // override this
     }
 
     get_container () {

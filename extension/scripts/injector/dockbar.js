@@ -20,6 +20,6 @@ class Dockbar {
     }
 
     add_element(element) {
-        this._dockbar.appendChild(element.draw_element())
+        this._dockbar.appendChild(element)
     }
 }

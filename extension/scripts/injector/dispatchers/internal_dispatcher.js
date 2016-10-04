@@ -22,34 +22,24 @@ class InternalDispatcher extends BaseDispatcher {
         this._internalMakerList = new InternalMakerList()
         this._elements_registered = {}
         this._config = []
-        this._dirty_config = true
     }
 
     resolve_request(parameter) {
-        this._dirty_config = true
-        if(this._internalMakerList.get_handler(parameter.response.name))
+        if(this._internalMakerList.get_handler(parameter.name))
         {
             // salvo l'intero elemento inviato dalla host application
-            var makerElement = new (this._internalMakerList.get_handler(parameter.response.name))()
-            this.router.add_element(makerElement.create(this._document))
-            this._elements_registered[parameter.response.name] = makerElement
+            var elementMaker = new (this._internalMakerList.get_handler(parameter.name))()
+            this._router.get_dockbar().add_element(elementMaker.create(this._document))
+            this._elements_registered[parameter.name] = elementMaker
 
-            var mlc = MessageListenerCallbacks(
-                parameter.response.name, // name
+            var mlc = new MessageListenerCallbacks(
+                parameter.name, // name
 
                 this,
-
-                function (response) { // from native
-                    if(response) {
-                        var msg = {
-                            type: response.type,
-                            tabId: response.tabId,
-                            name: response.name,
-                            response: response.response
-                        }
-                        chrome.runtime.sendMessage(response.tabId, msg);
-                    }
+                function (response) {
+                    elementMaker.handle_response(response)
                 }
+
             )
             this._router.add_listener(mlc)
         }

@@ -1,8 +1,8 @@
 class DispatcherList {
     constructor(router) {
         this._managerDispatcherList = {
-            0: new InternalDispatcher(router),
-            1: new ExternalDispatcher(router)
+            0: new InternalDispatcher(router, document),
+            1: new ExternalDispatcher(router, document)
         }
     }
 
@@ -25,7 +25,7 @@ class ConfigManager extends BaseManager {
         // dentro parameters.response ho la lista di oggetti che configurano la dockbar
         if(parameters && parameters.request) {
             for(var elem in parameters.request.response) {
-                this._dispatcherList.getDispatcher(parameters.request.response[elem].type).resolve_request(elem)
+                this._dispatcherList.getDispatcher(parameters.request.response[elem].type).resolve_request(parameters.request.response[elem])
             }
         }
     }

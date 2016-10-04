@@ -1,13 +1,13 @@
 class BaseMaker {
-    constructor(name, element_maker, send_command){
+    constructor(name, element, send_command){
         this._name = name
         this._send_command = send_command
-        this._element_maker = element_maker
+        this._element = element
     }
 
     create(page_document) {
-        var maker = new this._element_maker(page_document)()
-        return maker.create()
+        var element = new (this._element)(page_document)
+        return element.create()
     }
 
     send_command () {
