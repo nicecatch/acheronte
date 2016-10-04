@@ -13,5 +13,7 @@ class GenericElement extends DockbarElement {
         image.addEventListener('click', function() {
             self._router.send_message({ name: self.get_name() })
         })
+
+        return image
     }
 }

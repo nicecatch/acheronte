@@ -6,13 +6,22 @@ class BaseMaker {
     }
 
     create(page_document) {
-        var element = new (this._element)(page_document)
+        var element = this._initialize_element(page_document)
         return element.create()
     }
 
     send_command () {
         return this._send_command || false
     }
+
+    handle_response (parameters) {
+        // override this
+    }
+
+    _initialize_element(page_document){
+        return new (this._element)(page_document)
+    }
+
 
     get_name() {
         return this._name || ''

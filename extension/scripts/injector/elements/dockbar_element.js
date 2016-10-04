@@ -20,10 +20,6 @@ class DockbarElement {
         return button
     }
 
-    handle_response () {
-        // override this
-    }
-
     get_container () {
         if(!this._container) {
             this._container = this._document.createElement('div')

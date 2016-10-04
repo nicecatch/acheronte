@@ -9,7 +9,7 @@ class ExternalDispatcher extends BaseDispatcher {
     resolve_request(parameter) {
         this._elements_registered[parameter.name] = parameter // salvo l'intero elemento inviato dalla host application
 
-        var makerElement = new GenericMaker(this._document, parameter.name)
+        var makerElement = new GenericMaker(this._document, parameter)
         this._router.get_dockbar().add_element(makerElement.draw_element())
         this._elements_registered[parameter.name] = makerElement
 
@@ -18,16 +18,8 @@ class ExternalDispatcher extends BaseDispatcher {
 
             this,
 
-            function (response) { // from native
-                if(response) {
-                    var msg = {
-                        type: response.type,
-                        tabId: response.tabId,
-                        name: response.name,
-                        response: response.response
-                    }
-                    chrome.tabs.sendMessage(msg.tabId, msg);  
-                }
+            function (response) {
+                makerElement.handle_response(response)
             }
         )
         this._router.add_listener(mlc)
