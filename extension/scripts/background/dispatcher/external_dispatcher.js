@@ -7,11 +7,6 @@ class ExternalDispatcher extends BaseDispatcher {
         this._dirty_config = true
     }
     
-    check_validity(parameter) {
-        return parameter && parameter.response && parameter.response.name && parameter.response.value && parameter.response.icon
-
-    }
-    
     resolve_request(parameter) {
         this._dirty_config = true
         this._elements_registered[parameter.name] = parameter // salvo l'intero elemento inviato dalla host application
@@ -55,7 +50,8 @@ class ExternalDispatcher extends BaseDispatcher {
                         // e il nome dell'icona corrispondente per le font awesome
                         type: "1",
                         name: this._elements_registered[element].name,
-                        icon: this._elements_registered[element].icon
+                        icon: this._elements_registered[element].icon,
+                        position: this._elements_registered[element].position
                     })
                 }
             }

@@ -2,8 +2,8 @@
   "manifest_version": 2,
 
   "name": "Full Screen Helper",
-  "description": "Battery Level, Refresh Button visualizer, Auto refresher on load error",
-  "version": "0.0.6",
+  "description": "Dockbar for pages running in full screen mode",
+  "version": "1.0.0",
 
   "permissions": [
     "tabs",

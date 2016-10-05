@@ -59,13 +59,14 @@ int main()
 				//mystream << "configmanager.getresult() \n";
 				json::JSON list_configuration = json::Array();
 				list<string> cl = configManager.getConfig();
-				//int i = 0;
+				int i = 0;
 				for (string n : cl)
 				{
 					//response_message_json[to_string(i)] = json::JSON::Load(n);
 					json::JSON x = json::JSON::Load(n);
+					x["position"] = i;
 					list_configuration.append(x);
-					//i += 1;
+					i += 1;
 				}
 				//response_message_json["response"] = json::Array(list_configuration);
 				response_message_json["response"] = list_configuration;
