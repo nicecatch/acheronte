@@ -1,9 +1,17 @@
 class ReloadMaker extends BaseMaker {
     constructor() {
-        super('reload', ReloaderElement, false)
+        super('reload', false)
     }
 
-    handle_response (respnsone) {
-        // reloader doesn't need this
+    _get_internal_element() {
+        this._element = document.createElement('i')
+        this._element.className = "fa fa-refresh fa-4x"
+
+        this._element.addEventListener('click', function() {
+            location.reload(true)
+        })
+
+        return this._element
     }
+
 }

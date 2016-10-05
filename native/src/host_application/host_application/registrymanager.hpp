@@ -15,5 +15,4 @@ public:
 
 private:
 	HKEY hKey;
-	DWORD szsize;
 };

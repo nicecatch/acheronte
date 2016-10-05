@@ -29,8 +29,6 @@
       "scripts/background/dispatcher/internal_dispatcher.js",
 
       "scripts/background/handlers/base_handler.js",
-      "scripts/background/handlers/battery_handler.js",
-      "scripts/background/handlers/reload_handler.js",
       "scripts/background/handlers/wifi_handler.js",
 
       "scripts/background/managers/base_manager.js",
@@ -51,12 +49,6 @@
         "scripts/injector/dispatchers/base_dispatcher.js",
         "scripts/injector/dispatchers/external_dispatcher.js",
         "scripts/injector/dispatchers/internal_dispatcher.js",
-
-        "scripts/injector/elements/dockbar_element.js",
-        "scripts/injector/elements/battery_element.js",
-        "scripts/injector/elements/reloader_element.js",
-        "scripts/injector/elements/wifi_element.js",
-        "scripts/injector/elements/generic_element.js",
 
         "scripts/injector/makers/base_maker.js",
         "scripts/injector/makers/battery_maker.js",

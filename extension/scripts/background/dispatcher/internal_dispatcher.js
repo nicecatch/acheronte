@@ -2,8 +2,6 @@ class InternalHandlerList {
     constructor(router) {
         this._managerDispatcherList = {
             'wifi': WifiHandler,
-            'reload': ReloadHandler,
-            'battery': BatteryHandler
         }
     }
 
@@ -72,6 +70,12 @@ class InternalDispatcher extends BaseDispatcher {
                 }
             )
             this._router.add_listener(mlc)
+        }
+        else
+        {
+            // Elements that don't need to communicate with native host application
+            var baseHandler = new BaseHandler(parameter.name, '')
+            this._elements_registered[parameter.name] = baseHandler
         }
     }
 

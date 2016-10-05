@@ -1,25 +1,36 @@
 class BaseMaker {
-    constructor(name, element, send_command){
+    constructor(name, send_command){
         this._name = name
         this._send_command = send_command
-        this._element = element
+        this._element = null
     }
 
-    create(page_document) {
-        var element = this._initialize_element(page_document)
-        return element.create()
+    _get_internal_element() {
+        // override this
+        return null
     }
 
-    send_command () {
-        return this._send_command || false
-    }
 
     handle_response (parameters) {
         // override this
     }
 
-    _initialize_element(page_document){
-        return new (this._element)(page_document)
+    _get_container() {
+        if(!this._container) {
+            this._container = document.createElement('div')
+            this._container.id = this._name + 'container'
+        }
+        return this._container
+    }
+
+    create() {
+        var button = this._get_container()
+        button.appendChild(this._get_internal_element())
+        return button
+    }
+
+    send_command () {
+        return this._send_command || false
     }
 
 
