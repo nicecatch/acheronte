@@ -1,6 +1,6 @@
 class GenericElement extends DockbarElement {
     constructor(document, params) {
-        super(params.name, document)
+        super(document, params.name)
         this._icon = params.icon
     }
 
@@ -11,7 +11,7 @@ class GenericElement extends DockbarElement {
         
         var self = this
         image.addEventListener('click', function() {
-            self._router.send_message({ name: self.get_name() })
+            router.send_message({ name: self.get_name() })
         })
 
         return image

@@ -17,5 +17,5 @@ public:
 private:
 	RegistryManager registryManager;
 	LONG call_result;
-	void getValue(LPCSTR keyName, string & data);
+	void getValue(LPCSTR keyName, string & data, int buf_size);
 };

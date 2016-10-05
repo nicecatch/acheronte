@@ -9,12 +9,12 @@ class ExternalDispatcher extends BaseDispatcher {
     resolve_request(parameter) {
         this._elements_registered[parameter.name] = parameter // salvo l'intero elemento inviato dalla host application
 
-        var makerElement = new GenericMaker(this._document, parameter)
-        this._router.get_dockbar().add_element(makerElement.draw_element())
+        var makerElement = new GenericMaker(parameter)
+        this._router.get_dockbar().add_element(makerElement.create(this._document))
         this._elements_registered[parameter.name] = makerElement
 
         var mlc = new MessageListenerCallbacks(
-            parameter.response.name, // name
+            parameter.name, // name
 
             this,
 

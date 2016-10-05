@@ -28,7 +28,7 @@ class ExternalDispatcher extends BaseDispatcher {
                     name: parameter.name,
                     command: parameter.value,
                 }
-                this.router.send_message(msg)
+                this._router.send_message(msg)
             }, 
 
             function (response) { // from native

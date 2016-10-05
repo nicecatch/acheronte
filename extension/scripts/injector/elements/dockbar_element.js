@@ -2,7 +2,7 @@ class DockbarElement {
     constructor(page_document, name) {
         this._name = name
         this._document = page_document
-
+        this._element = null
     }
 
     _get_internal_element() {
@@ -14,13 +14,13 @@ class DockbarElement {
         return this._name
     }
 
-    create () {
+    create() {
         var button = this.get_container()
         button.appendChild(this._get_internal_element())
         return button
     }
 
-    get_container () {
+    get_container() {
         if(!this._container) {
             this._container = this._document.createElement('div')
             this._container.id = this._name + 'container'

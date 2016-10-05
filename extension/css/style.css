@@ -15,7 +15,7 @@
     margin-right: 10px;
 }
 
-#battery-color.low-battery{
+#batterycontainer.low-battery{
     color: red;
 }
 

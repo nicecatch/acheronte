@@ -5,13 +5,13 @@
 
 using namespace std;
 
-#define SIZE_DEEFAULT 2048
+#define SIZE_DEEFAULT 1024
 
 class RegistryManager {
 public:
 	RegistryManager();
 	LONG OpenKey(HKEY openKey, LPCSTR regkey);
-	LONG GetValue(LPCSTR keyName, string &returnValue);
+	LONG GetValue(LPCSTR keyName, string &returnValue, int buf_size);
 
 private:
 	HKEY hKey;
