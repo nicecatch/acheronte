@@ -6,11 +6,16 @@ class WifiMaker extends BaseMaker {
     _get_internal_element() {
         this._element = document.createElement('i')
 
+
+
+        // ask to be added to watch list
+        chrome.runtime.sendMessage({name:"wifi"}, function(response) {
+        })
         return this._element
     }
 
-    handle_response(request) {
-        var value = parseInt(request.signal)
+    handle_response(params) {
+        var value = parseInt(params.request.signal)
         var class_name = 'wifi-'
         if(isNaN(value) || value == -1) {
             class_name += '0'

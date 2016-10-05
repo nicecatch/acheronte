@@ -4,8 +4,8 @@ class LinkMaker extends BaseMaker {
     }
 
     _get_internal_element(params) {
-        this._url = params.extraParams ?  params.extraParams.url : '/'
-        this._icon = params.extraParams ? params.extraParams.icon : "home"
+        this._url = params && params.extraParams ? params.extraParams.url : "/"
+        this._icon = params && params.extraParams ? params.extraParams.icon : "home"
 
         this._element = document.createElement('i')
         this._element.className = "fa fa-" + this._icon + " fa-4x"

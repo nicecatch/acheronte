@@ -31,9 +31,10 @@ class InternalDispatcher extends BaseDispatcher {
         this._dirty_config = true
         if(this._internalHandlerList.get_handler(parameter.name))
         {
-            this._elements_registered[parameter.name] = new (this._internalHandlerList.get_handler(parameter.name))()
+            var handler = new (this._internalHandlerList.get_handler(parameter.name))()
+            this._elements_registered[parameter.name] = handler
 
-            var callback_from_extension = null
+/*            var callback_from_extension = null
 
             // Aggiungo la risposta solo se il bottone ha necessità di inviare un comando alla host application
             if(this._elements_registered[parameter.name] && this._elements_registered[parameter.name].get_command() != '')
@@ -47,16 +48,17 @@ class InternalDispatcher extends BaseDispatcher {
                     }
                     this.router.send_message(msg)
                 }
-            }
+            }*/
 
             var mlc = new MessageListenerCallbacks(
                 parameter.name, // name
 
-                this,
+                handler,
 
-                callback_from_extension, 
+                handler.callback_from_extension,
+                handler.callback_from_native
 
-                function (response) { // from native
+/*                function (response) { // from native
                     if(response) {
                         var msg = {
                             type: response.type,
@@ -66,7 +68,7 @@ class InternalDispatcher extends BaseDispatcher {
                         }
                         chrome.tabs.sendMessage(response.tabId, msg);  
                     }
-                }
+                }*/
             )
             this._router.add_listener(mlc)
         }

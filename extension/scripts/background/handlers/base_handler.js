@@ -19,4 +19,12 @@ class BaseHandler {
     get_params() {
         return this._params
     }
+
+    callback_from_extension(params) {
+        // override this
+    }
+
+    callback_from_native(params) {
+        // override this
+    }
 }
