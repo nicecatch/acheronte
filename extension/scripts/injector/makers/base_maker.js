@@ -5,7 +5,7 @@ class BaseMaker {
         this._element = null
     }
 
-    _get_internal_element() {
+    _get_internal_element(params) {
         // override this
         return null
     }
@@ -23,9 +23,9 @@ class BaseMaker {
         return this._container
     }
 
-    create() {
+    create(params) {
         var button = this._get_container()
-        button.appendChild(this._get_internal_element())
+        button.appendChild(this._get_internal_element(params))
         return button
     }
 

@@ -31,7 +31,6 @@ class InternalDispatcher extends BaseDispatcher {
         this._dirty_config = true
         if(this._internalHandlerList.get_handler(parameter.name))
         {
-            // salvo l'intero elemento inviato dalla host application
             this._elements_registered[parameter.name] = new (this._internalHandlerList.get_handler(parameter.name))()
 
             var callback_from_extension = null
@@ -75,6 +74,10 @@ class InternalDispatcher extends BaseDispatcher {
         {
             // Elements that don't need to communicate with native host application
             var baseHandler = new BaseHandler(parameter.name, '')
+            if(parameter.extraParams)
+            {
+                baseHandler.set_params(parameter.extraParams)
+            }
             this._elements_registered[parameter.name] = baseHandler
         }
     }
@@ -83,11 +86,17 @@ class InternalDispatcher extends BaseDispatcher {
         if(this._dirty_config) {
             for(var element in this._elements_registered) {
                 if(this._elements_registered.hasOwnProperty(element)) {
-                    this._config.push({
+                    var elem_to_push = {
                         // All'estensione interessa unicamente il nome del bottone
                         type: "0",
                         name: this._elements_registered[element].get_name()
-                    })
+                    }
+
+                    if(this._elements_registered[element].get_params()) {
+                        elem_to_push.extraParams = this._elements_registered[element].get_params()
+                    }
+
+                    this._config.push(elem_to_push)
                 }
             }
             this._dirty_config = false

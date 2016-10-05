@@ -3,7 +3,8 @@ class InternalMakerList {
         this._managerDispatcherList = {
             'wifi': WifiMaker,
             'reload': ReloadMaker,
-            'battery': BatteryMaker
+            'battery': BatteryMaker,
+            'link': LinkMaker
         }
     }
 
@@ -29,7 +30,7 @@ class InternalDispatcher extends BaseDispatcher {
         {
             // salvo l'intero elemento inviato dalla host application
             var elementMaker = new (this._internalMakerList.get_handler(parameter.name))()
-            this._router.get_dockbar().add_element(elementMaker.create(this._document))
+            this._router.get_dockbar().add_element(elementMaker.create(parameter))
             this._elements_registered[parameter.name] = elementMaker
 
             var mlc = new MessageListenerCallbacks(

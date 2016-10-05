@@ -11,4 +11,12 @@ class BaseHandler {
     get_name() {
         return this._name || ''
     }
+
+    set_params(params)  {
+        this._params = params
+    }
+
+    get_params() {
+        return this._params
+    }
 }

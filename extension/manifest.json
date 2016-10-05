@@ -54,6 +54,7 @@
         "scripts/injector/makers/battery_maker.js",
         "scripts/injector/makers/reload_maker.js",
         "scripts/injector/makers/wifi_maker.js",
+        "scripts/injector/makers/link_maker.js",
         "scripts/injector/makers/generic_maker.js",
 
         "scripts/injector/managers/base_manager_injector.js",
