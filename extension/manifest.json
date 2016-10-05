@@ -2,8 +2,8 @@
   "manifest_version": 2,
 
   "name": "Full Screen Helper",
-  "description": "Battery Level, Refresh Button visualizer, Auto refresher on load error",
-  "version": "0.0.6",
+  "description": "Dockbar for pages running in full screen mode",
+  "version": "1.0.0",
 
   "permissions": [
     "tabs",
@@ -22,9 +22,20 @@
   "background": {
     "persistent": true,
     "scripts": [
-      "scripts/background/native_manager.js",
-      "scripts/background/objects_manager.js",
-      "scripts/background/dispatcher.js",
+      "scripts/background/message_listener_callbacks.js",
+
+      "scripts/background/dispatcher/base_dispatcher.js",
+      "scripts/background/dispatcher/external_dispatcher.js",
+      "scripts/background/dispatcher/internal_dispatcher.js",
+
+      "scripts/background/handlers/base_handler.js",
+      "scripts/background/handlers/wifi_handler.js",
+
+      "scripts/background/managers/base_manager.js",
+      "scripts/background/managers/config_manager.js",
+
+      "scripts/background/background_router.js",
+
       "scripts/background.js"
     ]
   },
@@ -32,14 +43,35 @@
   "content_scripts": [
     {
       "matches": ["*://*/*"],
-      "js": ["scripts/injector_script.js"],
+      "js": [
+        "scripts/injector/message_listener_callbacks.js",
+
+        "scripts/injector/dispatchers/base_dispatcher.js",
+        "scripts/injector/dispatchers/external_dispatcher.js",
+        "scripts/injector/dispatchers/internal_dispatcher.js",
+
+        "scripts/injector/makers/base_maker.js",
+        "scripts/injector/makers/battery_maker.js",
+        "scripts/injector/makers/reload_maker.js",
+        "scripts/injector/makers/wifi_maker.js",
+        "scripts/injector/makers/link_maker.js",
+        "scripts/injector/makers/generic_maker.js",
+
+        "scripts/injector/managers/base_manager_injector.js",
+        "scripts/injector/managers/config_manager_injector.js",
+
+        "scripts/injector/dockbar.js",
+
+        "scripts/injector/injector_router.js",
+
+        "scripts/injector.js"
+      ],
       "css": ["css/style.css", "css/font-awesome.css"],
       "run_at": "document_idle"
     }
   ],
 
   "web_accessible_resources": [
-    "html/*",
     "fonts/*",
     "images/wifi/*"
   ]

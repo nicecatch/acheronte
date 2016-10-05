@@ -9,6 +9,12 @@ class BaseDispatcher {
     }
 
     resolve(parameters) {
+        //if(this.check_validity(parameters)) {
+            this.resolve_request(parameters)
+        //}
+    }
+    
+    get_config() {
         // override this
     }
 }
