@@ -50,8 +50,8 @@ Install extension through Chrome Store or force install policy and restart Chrom
     An example can be found under native/create_configuration.reg
 Quite self explanatory:
 *    Values must be REG_SZ inside the registry
-*    type: 0 is for external application
-*    Only 1 'link' can be used
+*    type: 1 is for external application, type: 0 for pre-configured ones
+*    Only one 'link' can be used
 *    Don't overlap names
 
 ### Tested on
