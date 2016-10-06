@@ -28,7 +28,7 @@ class BatteryMaker extends BaseMaker {
             var level_rounded = Math.floor(level)
             level_rounded = level_rounded == 5 ? 4 : level_rounded
 
-            self._image.className = 'fa fa-battery-'+level_rounded+' fa-2x'
+            self._image.className = 'fa fa-battery-'+level_rounded+' fa-2x image-container'
 
             if(level_rounded==0){
                 self._element.parentElement.className = 'low-battery'
@@ -36,8 +36,7 @@ class BatteryMaker extends BaseMaker {
                 self._element.parentElement.className = ''
             }
 
-            self._span.innerText =  battery.level * 100 + "%"
-
+            self._span.innerHTML =  (battery.level * 100) + "<span class=\"percentage-symbol\">%</span>"
         });
     }
 
@@ -48,11 +47,10 @@ class BatteryMaker extends BaseMaker {
         this._element = document.createElement('div')
 
         this._image = document.createElement('i')
-        this._image.style.display = 'block'
 
         this._span = document.createElement('span')
-        this._span.style.fontWeight = 'bolder'
-        this._span.style.fontSize = '2.5em'
+        this._span.className = 'percentage-indicator'
+        //this._span.style.fontSize = '2.5em'
 
         this._element.appendChild(this._image)
         this._element.appendChild(this._span)

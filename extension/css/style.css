@@ -20,26 +20,41 @@
     color: red;
 }
 
-i.wifi-0 {
+i.image-container {
+    text-align: center;
+    display: block;
+}
+
+span.percentage-indicator {
+    font-size: 2em;
+    font-weight: bolder;
+}
+
+span.percentage-indicator > span.percentage-symbol {
+    font-size: 0.7em;
+    font-weight: bolder;
+}
+
+i.wifi-0:before {
     content: url('chrome-extension://__MSG_@@extension_id__/images/wifi/wifi_0.png')
 }
 
-i.wifi-1 {
+i.wifi-1:before {
     content: url('chrome-extension://__MSG_@@extension_id__/images/wifi/wifi_1.png')
 }
 
-i.wifi-1-red {
+i.wifi-1-red:before {
     content: url('chrome-extension://__MSG_@@extension_id__/images/wifi/wifi_1_red.png')
 }
 
-i.wifi-2 {
+i.wifi-2:before {
     content: url('chrome-extension://__MSG_@@extension_id__/images/wifi/wifi_2.png')
 }
 
-i.wifi-3 {
+i.wifi-3:before {
     content: url('chrome-extension://__MSG_@@extension_id__/images/wifi/wifi_3.png')
 }
 
-i.wifi-4 {
+i.wifi-4:before {
     content: url('chrome-extension://__MSG_@@extension_id__/images/wifi/wifi_4.png')
 }

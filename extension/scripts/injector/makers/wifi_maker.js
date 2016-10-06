@@ -7,11 +7,9 @@ class WifiMaker extends BaseMaker {
         this._element = document.createElement('div')
 
         this._image = document.createElement('i')
-        this._image.style.display = 'block'
 
         this._span = document.createElement('span')
-        this._span.style.fontWeight = 'bolder'
-        this._span.style.fontSize = '2.5em'
+        this._span.className = 'percentage-indicator'
 
         this._element.appendChild(this._image)
         this._element.appendChild(this._span)
@@ -39,9 +37,9 @@ class WifiMaker extends BaseMaker {
             if(value <= 15) {
                 class_name += '-red'
             }
-            this._span.innerText =  value + "%"
+            this._span.innerHTML =  value + "<span class=\"percentage-symbol\">%</span>"
         }
-        this._image.className = class_name
+        this._image.className = class_name + ' image-container'
 
     }
 }
