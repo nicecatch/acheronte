@@ -9,7 +9,7 @@
 
 #dockbar > div {
     display: inline-block;
-    margin: 5px;
+    margin: 10px;
 }
 
 #dockbar > div:not(:last-child) {

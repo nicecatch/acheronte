@@ -4,7 +4,17 @@ class WifiMaker extends BaseMaker {
     }
 
     _get_internal_element() {
-        this._element = document.createElement('i')
+        this._element = document.createElement('div')
+
+        this._image = document.createElement('i')
+        this._image.style.display = 'block'
+
+        this._span = document.createElement('span')
+        this._span.style.fontWeight = 'bolder'
+        this._span.style.fontSize = '2.5em'
+
+        this._element.appendChild(this._image)
+        this._element.appendChild(this._span)
 
 
 
@@ -19,6 +29,7 @@ class WifiMaker extends BaseMaker {
         var class_name = 'wifi-'
         if(isNaN(value) || value == -1) {
             class_name += '0'
+            this._span.innerText =  '-'
         }
         else {
             var level = Math.floor(value / 25) + 1
@@ -28,7 +39,9 @@ class WifiMaker extends BaseMaker {
             if(value <= 15) {
                 class_name += '-red'
             }
+            this._span.innerText =  value + "%"
         }
-        this._element.className = class_name
+        this._image.className = class_name
+
     }
 }

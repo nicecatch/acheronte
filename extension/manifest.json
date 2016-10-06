@@ -3,7 +3,7 @@
 
   "name": "Full Screen Helper",
   "description": "Dockbar for pages running in full screen mode",
-  "version": "1.0.0",
+  "version": "1.0.1",
 
   "permissions": [
     "tabs",
