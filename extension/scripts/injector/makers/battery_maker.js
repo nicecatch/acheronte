@@ -36,7 +36,7 @@ class BatteryMaker extends BaseMaker {
                 self._element.parentElement.className = ''
             }
 
-            self._span.innerHTML =  (battery.level * 100) + "<span class=\"percentage-symbol\">%</span>"
+            self._span.innerHTML =  Math.floor(battery.level * 100) + "<span class=\"percentage-symbol\">%</span>"
         });
     }
 
