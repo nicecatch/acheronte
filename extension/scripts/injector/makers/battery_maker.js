@@ -47,6 +47,7 @@ class BatteryMaker extends BaseMaker {
         this._element = document.createElement('div')
 
         this._image = document.createElement('i')
+        this._image.style.marginBottom = "4px"
 
         this._span = document.createElement('span')
         this._span.className = 'percentage-indicator'

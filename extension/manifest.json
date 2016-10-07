@@ -3,7 +3,7 @@
 
   "name": "Full Screen Helper",
   "description": "Dockbar for pages running in full screen mode",
-  "version": "1.0.3",
+  "version": "1.0.4",
 
   "permissions": [
     "tabs",
@@ -66,7 +66,7 @@
 
         "scripts/injector.js"
       ],
-      "css": ["css/style.css", "css/font-awesome.css"],
+      "css": ["css/animations.css", "css/style.css", "css/font-awesome.css"],
       "run_at": "document_idle"
     }
   ],
