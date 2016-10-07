@@ -14,8 +14,6 @@ const int SIZE_LENGTH = 4;
 
 int main() 
 {
-	//ofstream mystream;
-	//mystream.open("example.txt", ios::out | ios::app);
 	if (_setmode(_fileno(stdin), _O_BINARY) + _setmode(_fileno(stdout), _O_BINARY) < 0)
 	{
 		// cannot set stdin or stoud to binary, exit with error
@@ -30,17 +28,6 @@ int main()
 
 		cin.read((char *)&length, SIZE_LENGTH);
 
-		if (length == 0)
-		{
-			// Useful?
-			return 0;
-		}
-		else if (length == ULONG_MAX)
-		{
-			// if they are all '1's chrome has no message to send (fake read)
-			continue;
-		}
-
 		//read the json-message
 		string msg = "";
 		for (unsigned int i = 0; i < length; i++)
@@ -50,25 +37,21 @@ int main()
 
 		json::JSON parsed_message_json = json::JSON::Load(msg), response_message_json;
 
-		//mystream << "parsed_message_json[\"type\"]" << parsed_message_json["type"].ToString() << endl;
 		if ((parsed_message_json["type"]).ToString().compare("get_config") == 0)
 		{
 			ConfigManager configManager;
 			if (configManager.getResult() == ERROR_SUCCESS)
 			{
-				//mystream << "configmanager.getresult() \n";
 				json::JSON list_configuration = json::Array();
 				list<string> cl = configManager.getConfig();
 				int i = 0;
 				for (string n : cl)
 				{
-					//response_message_json[to_string(i)] = json::JSON::Load(n);
 					json::JSON x = json::JSON::Load(n);
 					x["position"] = i;
 					list_configuration.append(x);
 					i += 1;
 				}
-				//response_message_json["response"] = json::Array(list_configuration);
 				response_message_json["response"] = list_configuration;
 			}
 			else
@@ -123,6 +106,5 @@ int main()
 		// send message 
 		cout.write(message_to_send.c_str(), len);
 	}
-	//mystream.close();
 	return 0;
 }
