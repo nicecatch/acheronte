@@ -13,8 +13,8 @@
 }
 
 #dockbar i.tada {
-    -webkit-animation: tada 1s linear infinite;
-    animation: tada 1s linear infinite;
+    -webkit-animation: tada 1s linear 1;
+    animation: tada 1s linear 1;
 }
 
 #dockbar i.spin {
