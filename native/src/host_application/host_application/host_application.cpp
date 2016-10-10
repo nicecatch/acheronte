@@ -2,8 +2,6 @@
 
 #include "stdafx.h"
 
-#include <fstream>
-
 #include "json.hpp"
 #include "configmanager.hpp"
 #include "registrymanager.hpp"
@@ -82,6 +80,11 @@ int main()
 				}
 
 				response_message_json["response"] = response;
+			}
+
+			if (pipeFile != NULL)
+			{
+				_pclose(pipeFile);
 			}
 		}		
 
