@@ -22,6 +22,7 @@ class ExternalDispatcher extends BaseDispatcher {
                     tabId: response.sender.tab.id,
                     name: parameter.name,
                     command: parameter.value,
+                    async: parameter.async
                 }
                 this._router.send_message(msg)
             }, 

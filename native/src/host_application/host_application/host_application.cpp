@@ -5,6 +5,7 @@
 #include "json.hpp"
 #include "configmanager.hpp"
 #include "registrymanager.hpp"
+#include "ProcessManager.hpp"
 
 using namespace std;
 
@@ -18,6 +19,8 @@ int main()
 		// required as stated by chrome extension documentation
 		return 1;
 	}
+
+	ProcessManager pm;
 
 	while (1)
 	{	
@@ -62,30 +65,11 @@ int main()
 		{
 			string command = (parsed_message_json["command"]).ToString();
 
-			FILE* pipeFile;
+			char * command_char = new char[command.length() + 1];
+			strcpy(command_char, command.c_str());
+			response_message_json["response"] = pm.StartProcess(command_char, parsed_message_json["async"].ToBool());
+			delete[] command_char;
 
-			if ((pipeFile = _popen(command.c_str(), "r")) == NULL)
-			{
-				response_message_json["error"] = "Cannot open pipe";
-			}
-			else
-			{
-				char buffer_array[1024];
-				string response;
-
-				while (!feof(pipeFile))
-				{
-					if (fgets(buffer_array, 1024, pipeFile) != NULL)
-						response += buffer_array;
-				}
-
-				response_message_json["response"] = response;
-			}
-
-			if (pipeFile != NULL)
-			{
-				_pclose(pipeFile);
-			}
 		}		
 
 		// send back values that identify request

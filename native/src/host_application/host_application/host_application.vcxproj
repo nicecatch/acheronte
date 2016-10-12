@@ -155,6 +155,7 @@
   <ItemGroup>
     <ClInclude Include="configmanager.hpp" />
     <ClInclude Include="json.hpp" />
+    <ClInclude Include="ProcessManager.hpp" />
     <ClInclude Include="registrymanager.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -162,6 +163,7 @@
   <ItemGroup>
     <ClCompile Include="configmanager.cpp" />
     <ClCompile Include="host_application.cpp" />
+    <ClCompile Include="ProcessManager.cpp" />
     <ClCompile Include="registrymanager.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>

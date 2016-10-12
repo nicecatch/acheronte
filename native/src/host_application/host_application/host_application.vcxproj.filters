@@ -33,6 +33,9 @@
     <ClInclude Include="targetver.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="ProcessManager.hpp">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="host_application.cpp">
@@ -45,6 +48,9 @@
       <Filter>File di origine</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessManager.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>
