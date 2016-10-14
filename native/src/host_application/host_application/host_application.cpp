@@ -29,6 +29,11 @@ int main()
 
 		cin.read((char *)&length, SIZE_LENGTH);
 
+		if (length == 0 || length == UINT_MAX)
+		{
+			return 0;
+		}
+
 		//read the json-message
 		string msg = "";
 		for (unsigned int i = 0; i < length; i++)
