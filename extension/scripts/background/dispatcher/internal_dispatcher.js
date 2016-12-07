@@ -2,6 +2,8 @@ class InternalHandlerList {
     constructor() {
         this._managerDispatcherList = {
             'wifi': WifiHandler,
+            'zoom_minus': ZoomMinusHandler,
+            'zoom_plus': ZoomPlusHandler
         }
     }
 

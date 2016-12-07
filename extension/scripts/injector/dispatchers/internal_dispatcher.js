@@ -4,7 +4,9 @@ class InternalMakerList {
             'wifi': WifiMaker,
             'reload': ReloadMaker,
             'battery': BatteryMaker,
-            'link': LinkMaker
+            'link': LinkMaker,
+            'zoom_minus': ZoomMinusMaker,
+            'zoom_plus': ZoomPlusMaker
         }
     }
 

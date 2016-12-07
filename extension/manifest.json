@@ -30,6 +30,9 @@
 
       "scripts/background/handlers/base_handler.js",
       "scripts/background/handlers/wifi_handler.js",
+      "scripts/background/handlers/base_zoom_handler.js",
+      "scripts/background/handlers/zoom_minus_handler.js",
+      "scripts/background/handlers/zoom_plus_handler.js",
 
       "scripts/background/managers/base_manager.js",
       "scripts/background/managers/config_manager.js",
@@ -56,6 +59,9 @@
         "scripts/injector/makers/wifi_maker.js",
         "scripts/injector/makers/link_maker.js",
         "scripts/injector/makers/generic_maker.js",
+        "scripts/injector/makers/base_zoom_maker.js",
+        "scripts/injector/makers/zoom_minus_maker.js",
+        "scripts/injector/makers/zoom_plus_maker.js",
 
         "scripts/injector/managers/base_manager_injector.js",
         "scripts/injector/managers/config_manager_injector.js",
