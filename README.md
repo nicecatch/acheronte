@@ -15,6 +15,7 @@ This extension can show a little dockbar injected inside HTML pages to provide s
 
 Also it provides:
 *    Autoreload on loading page error (dns, connection etc etc)
+*    Allow access only to a set of websites defined throught a whitelist
 
 
 ## Install
@@ -44,12 +45,18 @@ Deploy native/register_application.reg substituting the path to manifest.json yo
 ####Step 5:
 Add configuration inside machine registry as explained below
 
+####Step 5b
+Define a whitelist of permitted sites (example can be found below). No or empty whitelist is considered as full access to sites 
+
 ####Step 6:
 Install extension through Chrome Store or force install policy and restart Chrome
 
 
 ## Registry configuration
     An example can be found inside native/create_configuration.reg
+
+## Whitelist configuration
+    An example can be found inside native/create_whitelist.reg
 
 ### Tested on
 Windows 10 x64 + Chrome 56.0.2924.21 beta (64-bit)

@@ -5,6 +5,8 @@
 #include "registrymanager.hpp"
 #include "ProcessManager.hpp"
 
+#include <fstream>
+
 using namespace std;
 
 const int SIZE_LENGTH = 4;
@@ -17,6 +19,9 @@ int main()
 		// required as stated by chrome extension documentation
 		return 1;
 	}
+
+	fstream file;
+	file.open("file.txt", ios::trunc);
 
 	ProcessManager pm;
 
@@ -46,10 +51,13 @@ int main()
 			ConfigManager configManager;
 			if (configManager.getResult() == ERROR_SUCCESS)
 			{
-				// Get configuration
-				string cl = configManager.getConfig();
-
+				// Get buttons configuration
+				string cl = configManager.getButtonsConfig();
 				response_message_json["buttons"] = json::JSON::Load(cl);
+
+				// Get whitelist configuration
+				cl = configManager.getWhiteListConfig();
+				response_message_json["whitelist"] = json::JSON::Load(cl);
 
 				// Get hostname
 				response_message_json["hostname"] = configManager.getHostName();
@@ -68,6 +76,7 @@ int main()
 			char * command_char = new char[command.length() + 1];
 			strcpy(command_char, command.c_str());
 			response_message_json["response"] = pm.StartProcess(command_char, parsed_message_json["async"].ToBool());
+			file << response_message_json["response"] << endl;
 			delete[] command_char;
 
 		}		
@@ -93,5 +102,6 @@ int main()
 		// send message 
 		std::cout.write(message_to_send.c_str(), len);
 	}
+	file.close();
 	return 0;
 }

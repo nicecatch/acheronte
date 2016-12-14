@@ -12,15 +12,14 @@ LONG ConfigManager::getResult() const {
 	return call_result;
 }
 
-string ConfigManager::getConfig() 
+string ConfigManager::getConfig(LPCSTR keyName)
 {
-
 	string config;
 	int buf_size = 1;
 
 	while (buf_size < 20) // cap ?
 	{
-		getValue(DEFAULT_DOCKBAR_VALUE, config, buf_size);
+		getValue(keyName, config, buf_size);
 
 		if (call_result == ERROR_SUCCESS) {
 			// key is retrieved
@@ -33,14 +32,24 @@ string ConfigManager::getConfig()
 		else
 		{
 			/*
-				Probably, the error is FILE_NOT_FOUND.
-				Anyway, if it is something different from SUCCESS or MORE_DATA stop the cycle
+			Probably, the error is FILE_NOT_FOUND.
+			Anyway, if it is something different from SUCCESS or MORE_DATA stop the cycle
 			*/
 			break;
 		}
 	}
 
 	return config;
+}
+
+string ConfigManager::getWhiteListConfig()
+{
+	return getConfig(DEFAULT_DOCKBAR_WHITELIST);
+}
+
+string ConfigManager::getButtonsConfig() 
+{
+	return getConfig(DEFAULT_DOCKBAR_BUTTONS);
 }
 
 string ConfigManager::getHostName()

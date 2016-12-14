@@ -13,3 +13,4 @@ var filter_webRequest_failed = {
     "types": ["main_frame"]
 }
 chrome.webRequest.onErrorOccurred.addListener(callback_webRequest_failed, filter_webRequest_failed)
+

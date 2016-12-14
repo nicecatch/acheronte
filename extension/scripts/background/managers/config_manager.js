@@ -39,16 +39,26 @@ class ConfigManager extends BaseManager {
 
     // La host application mi sta inviando la configurazione
     callback_from_native(parameters) {
-        // dentro parameters.buttons ho la lista di oggetti che configurano la dockbar
-        if(parameters && parameters.buttons) {
-            var self = this;
-            parameters.buttons.forEach(function(elem) {
-                self._dispatcherList.getDispatcher(elem.type).resolve(elem)
-            })
-        }
+        if(parameters) {
 
-        // Salvo l'hostname
-        this._hostname = parameters.hostname
+            if (parameters.buttons) {
+                // dentro parameters.buttons ho la lista di oggetti che configurano la dockbar
+                var self = this;
+                parameters.buttons.forEach(function (elem) {
+                    self._dispatcherList.getDispatcher(elem.type).resolve(elem)
+                })
+            }
+
+            if (parameters.hostname) {
+                // Salvo l'hostname
+                this._hostname = parameters.hostname
+            }
+
+            if (parameters.whitelist) {
+                this._whitelist = parameters.whitelist
+                this.activate_whitelist()
+            }
+        }
     }
 
     send_message(tab){
@@ -63,6 +73,34 @@ class ConfigManager extends BaseManager {
     get_hostname()
     {
         return this._hostname
+    }
+
+    activate_whitelist()
+    {
+        if(this._whitelist.length > 0) {
+            let self = this
+            chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
+
+                // Look for the current opened URL within whitelist
+
+                let found = self._whitelist.some(function(element){
+                    return tab.url.indexOf(element) >= 0
+                })
+
+                if(!found) {
+                    // check if tab still exists
+                    chrome.tabs.get(tabId, function (verifiedTab) {
+                        if (chrome.runtime.lastError) {
+                            let errorMessage = chrome.runtime.lastError.message
+                            // check the lastError message so Chrome won't write to console
+                        } else if(verifiedTab) {
+                            chrome.tabs.remove(verifiedTab.id)
+                        }
+                    })
+                }
+            })
+
+        }
     }
 
     static getRequestType() {
