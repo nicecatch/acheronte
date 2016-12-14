@@ -3,7 +3,7 @@
 
   "name": "Full Screen Helper",
   "description": "Dockbar for pages running in full screen mode",
-  "version": "1.0.6",
+  "version": "1.1.2",
 
   "permissions": [
     "tabs",
@@ -30,6 +30,7 @@
 
       "scripts/background/handlers/base_handler.js",
       "scripts/background/handlers/wifi_handler.js",
+      "scripts/background/handlers/hostname_handler.js",
       "scripts/background/handlers/base_zoom_handler.js",
       "scripts/background/handlers/zoom_minus_handler.js",
       "scripts/background/handlers/zoom_plus_handler.js",
@@ -54,12 +55,14 @@
         "scripts/injector/dispatchers/internal_dispatcher.js",
 
         "scripts/injector/makers/base_maker.js",
+        "scripts/injector/makers/base_zoom_maker.js",
         "scripts/injector/makers/battery_maker.js",
+        "scripts/injector/makers/collapse_maker.js",
+        "scripts/injector/makers/generic_maker.js",
+        "scripts/injector/makers/hostname_maker.js",
+        "scripts/injector/makers/link_maker.js",
         "scripts/injector/makers/reload_maker.js",
         "scripts/injector/makers/wifi_maker.js",
-        "scripts/injector/makers/link_maker.js",
-        "scripts/injector/makers/generic_maker.js",
-        "scripts/injector/makers/base_zoom_maker.js",
         "scripts/injector/makers/zoom_minus_maker.js",
         "scripts/injector/makers/zoom_plus_maker.js",
 

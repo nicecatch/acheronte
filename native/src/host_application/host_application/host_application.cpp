@@ -1,5 +1,3 @@
-// host_application.cpp : definisce il punto di ingresso dell'applicazione console.
-
 #include "stdafx.h"
 
 #include "json.hpp"
@@ -48,17 +46,14 @@ int main()
 			ConfigManager configManager;
 			if (configManager.getResult() == ERROR_SUCCESS)
 			{
-				json::JSON list_configuration = json::Array();
-				list<string> cl = configManager.getConfig();
-				int i = 0;
-				for (string n : cl)
-				{
-					json::JSON x = json::JSON::Load(n);
-					x["position"] = i;
-					list_configuration.append(x);
-					i += 1;
-				}
-				response_message_json["response"] = list_configuration;
+				// Get configuration
+				string cl = configManager.getConfig();
+
+				response_message_json["buttons"] = json::JSON::Load(cl);
+
+				// Get hostname
+				response_message_json["hostname"] = configManager.getHostName();
+
 			}
 			else
 			{
@@ -94,9 +89,9 @@ int main()
 		unsigned int len = message_to_send.length();
 
 		// send back the length as 4 bytes
-		cout.write((char*)&len, 4);
+		std::cout.write((char*)&len, 4);
 		// send message 
-		cout.write(message_to_send.c_str(), len);
+		std::cout.write(message_to_send.c_str(), len);
 	}
 	return 0;
 }

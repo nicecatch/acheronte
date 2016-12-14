@@ -24,8 +24,14 @@ class BaseMaker {
     }
 
     create(params) {
-        var button = this._get_container()
+        let button = this._get_container()
         button.appendChild(this._get_internal_element(params))
+        if(params.hide) {
+            button.classList.toggle('hide-button')
+        }
+
+        button.dataset.collapse = !!params.hide
+
         return button
     }
 

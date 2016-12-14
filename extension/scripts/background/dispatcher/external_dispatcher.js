@@ -47,12 +47,11 @@ class ExternalDispatcher extends BaseDispatcher {
             for(var element in this._elements_registered) {
                 if(this._elements_registered.hasOwnProperty(element)) {
                     this._config.push({
-                        // All'estensione interessa unicamente il nome del bottone 
-                        // e il nome dell'icona corrispondente per le font awesome
                         type: "1",
                         name: this._elements_registered[element].name,
                         icon: this._elements_registered[element].icon,
-                        position: this._elements_registered[element].position
+                        position: this._elements_registered[element].position,
+                        hide: !!this._elements_registered[element].hide
                     })
                 }
             }

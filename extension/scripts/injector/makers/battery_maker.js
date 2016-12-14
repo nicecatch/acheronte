@@ -7,7 +7,7 @@ class BatteryMaker extends BaseMaker {
 
     _get_battery_promise() {
 
-        var battery=navigator.battery||navigator.webkitBattery||navigator.mozBattery;
+        let battery=navigator.battery||navigator.webkitBattery||navigator.mozBattery;
 
         if(battery){
             return new Promise(function(resolve, reject){ resolve(battery); });
@@ -21,19 +21,19 @@ class BatteryMaker extends BaseMaker {
 
     _print_battery_percentage() {
 
-        var self = this
+        let self = this
 
         this._battery_promise.then(function(battery) {
-            var level = (battery.level <= 1 ? battery.level : 1) * 100 / 20
-            var level_rounded = Math.floor(level)
+            let level = (battery.level <= 1 ? battery.level : 1) * 100 / 20
+            let level_rounded = Math.floor(level)
             level_rounded = level_rounded == 5 ? 4 : level_rounded
 
             self._image.className = 'fa fa-battery-'+level_rounded+' fa-2x image-container'
 
             if(level_rounded==0){
-                self._element.parentElement.className = 'low-battery'
+                self._element.parentElement.classList.add('low-battery')
             } else {
-                self._element.parentElement.className = ''
+                self._element.parentElement.classList.remove('low-battery')
             }
 
             self._span.innerHTML =  Math.floor(battery.level * 100) + "<span class=\"percentage-symbol\">%</span>"
@@ -58,7 +58,7 @@ class BatteryMaker extends BaseMaker {
 
         this._print_battery_percentage()
 
-        var self = this
+        let self = this
 
         setInterval(function(){
             self._print_battery_percentage()

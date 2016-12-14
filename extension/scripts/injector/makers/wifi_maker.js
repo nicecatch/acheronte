@@ -17,10 +17,10 @@ class WifiMaker extends BaseMaker {
 
 
         // request to be added to watch list
-        /*chrome.runtime.sendMessage({name:"wifi"}, function(response) {
-        })*/
+        chrome.runtime.sendMessage({name:"wifi"}, function(response) {
+        })
 
-        router.send_message({name:"wifi"})
+        //router.send_message({name:"wifi"})
         return this._element
     }
 

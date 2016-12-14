@@ -39,13 +39,16 @@ class ConfigManager extends BaseManager {
 
     // La host application mi sta inviando la configurazione
     callback_from_native(parameters) {
-        // dentro parameters.response ho la lista di oggetti che configurano la dockbar
-        if(parameters && parameters.response) {
+        // dentro parameters.buttons ho la lista di oggetti che configurano la dockbar
+        if(parameters && parameters.buttons) {
             var self = this;
-            parameters.response.forEach(function(elem) {
+            parameters.buttons.forEach(function(elem) {
                 self._dispatcherList.getDispatcher(elem.type).resolve(elem)
             })
         }
+
+        // Salvo l'hostname
+        this._hostname = parameters.hostname
     }
 
     send_message(tab){
@@ -55,6 +58,11 @@ class ConfigManager extends BaseManager {
             name: 'get_config'
         }
         this.router.send_message(msg)
+    }
+
+    get_hostname()
+    {
+        return this._hostname
     }
 
     static getRequestType() {

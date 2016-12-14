@@ -12,28 +12,22 @@ LONG ConfigManager::getResult() const {
 	return call_result;
 }
 
-list<string> ConfigManager::getConfig() {
+string ConfigManager::getConfig() 
+{
 
-	int i = 0;
-
-	list<string> elements;
+	string config;
 	int buf_size = 1;
-	// Max 100 key?
-	for (i = 1; i <= MAX_KEYS; i++) {
 
-		string keyName = to_string(i);
-		LPCSTR buffer = keyName.c_str();
+	while (buf_size < 20) // cap ?
+	{
+		getValue(DEFAULT_DOCKBAR_VALUE, config, buf_size);
 
-		string value;
-		getValue(buffer, value, buf_size);
 		if (call_result == ERROR_SUCCESS) {
-			// key is retrieved, get next one
-			elements.push_back(value);
-			buf_size = 1;
+			// key is retrieved
+			break;
 		}
 		else if (call_result == ERROR_MORE_DATA) {
 			// needed more space to retrieve key
-			i--;
 			buf_size++;
 		}
 		else
@@ -44,8 +38,16 @@ list<string> ConfigManager::getConfig() {
 			*/
 			break;
 		}
-		
 	}
 
-	return elements;
+	return config;
+}
+
+string ConfigManager::getHostName()
+{
+	TCHAR buffer[256];
+	DWORD dwSize = sizeof(buffer);
+	GetComputerNameEx(COMPUTER_NAME_FORMAT::ComputerNameNetBIOS, buffer, &dwSize);
+
+	return buffer;
 }

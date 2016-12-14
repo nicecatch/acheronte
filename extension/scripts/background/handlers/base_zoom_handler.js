@@ -17,14 +17,13 @@ class BaseZoomHandler extends BaseHandler {
 
     _get_next_zoom(zoomFactor)
     {
-        let i = ZOOM_LEVELS.indexOf(zoomFactor)
+        let i = ZOOM_LEVELS.indexOf(Math.round(zoomFactor * 100 ) / 100)
 
         if(i<0) // default ?
         {
             return 1
             //return ZOOM_LEVELS[Math.floor(ZOOM_LEVELS.length/2)] // default?
         }
-
 
         i = this._zoom == 'plus' ? i + 1 : i - 1
 

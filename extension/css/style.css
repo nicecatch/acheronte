@@ -1,3 +1,10 @@
+/*html {
+    transform: scale(2) !important;
+    height: 50% !important;
+    width: 50% !important;
+    margin: 12.5% 0 0 25% !important;
+}*/
+
 @font-face {
     font-family: "BPreplayBold";
     src: url('chrome-extension://__MSG_@@extension_id__/fonts/BPreplayBold.woff') format('woff');
@@ -24,16 +31,23 @@
 
 #dockbar div {
     font-family: "BPreplayBold", Verdana, Tahoma, "Comic Sans MS", cursive, sans-serif !important;
-    font-size: 12px;
+
+    font-size: 1.3vmax;
+}
+
+#dockbar > div.hide-button {
+    display: none;
 }
 
 #dockbar > div {
     display: inline-block;
-    margin: 10px;
+    margin-left: 0.8em;
+    margin-top: 0.8em;
+    margin-bottom: 0.8em;
 }
 
 #dockbar > div:not(:last-child) {
-    margin-right: 10px;
+    margin-right: 0.8em;
 }
 
 #batterycontainer.low-battery{
@@ -45,7 +59,7 @@
     display: block;
 }
 
-span.percentage-indicator {
+span.percentage-indicator, span.hostname-indicator {
     font-size: 2em;
     font-weight: bolder;
 }
@@ -56,25 +70,55 @@ span.percentage-indicator > span.percentage-symbol {
 }
 
 #dockbar i.wifi-0:before {
-    content: url('chrome-extension://__MSG_@@extension_id__/images/wifi/wifi_0.png')
+    background-image: url('chrome-extension://__MSG_@@extension_id__/images/wifi/wifi_0.png');
+    background-size: 2vmax 2vmax;
+    display: inline-block;
+    content : "";
+    width: 2vmax;
+    height: 2vmax;
 }
 
 #dockbar i.wifi-1:before {
-    content: url('chrome-extension://__MSG_@@extension_id__/images/wifi/wifi_1.png')
+    background-image: url('chrome-extension://__MSG_@@extension_id__/images/wifi/wifi_1.png');
+    background-size: 2vmax 2vmax;
+    display: inline-block;
+    content : "";
+    width: 2vmax;
+    height: 2vmax;
 }
 
 #dockbar i.wifi-1-red:before {
-    content: url('chrome-extension://__MSG_@@extension_id__/images/wifi/wifi_1_red.png')
+    background-image: url('hrome-extension://__MSG_@@extension_id__/images/wifi/wifi_1_red.png');
+    background-size: 2vmax 2vmax;
+    display: inline-block;
+    content : "";
+    width: 2vmax;
+    height: 2vmax;
 }
 
 #dockbar i.wifi-2:before {
-    content: url('chrome-extension://__MSG_@@extension_id__/images/wifi/wifi_2.png')
+    background-image: url('chrome-extension://__MSG_@@extension_id__/images/wifi/wifi_2.png');
+    background-size: 2vmax 2vmax;
+    display: inline-block;
+    content : "";
+    width: 2vmax;
+    height: 2vmax;
 }
 
 #dockbar i.wifi-3:before {
-    content: url('chrome-extension://__MSG_@@extension_id__/images/wifi/wifi_3.png')
+    background-image: url('chrome-extension://__MSG_@@extension_id__/images/wifi/wifi_3.png');
+    background-size: 2vmax 2vmax;
+    display: inline-block;
+    content : "";
+    width: 2vmax;
+    height: 2vmax;
 }
 
 #dockbar i.wifi-4:before {
-    content: url('chrome-extension://__MSG_@@extension_id__/images/wifi/wifi_4.png')
+    background-image: url('chrome-extension://__MSG_@@extension_id__/images/wifi/wifi_4.png');
+    background-size: 2vmax 2vmax;
+    display: inline-block;
+    content : "";
+    width: 2vmax;
+    height: 2vmax;
 }

@@ -1,7 +1,6 @@
 class BaseHandler {
     constructor(name, command){
         this._name = name
-        //this._position = parameters.position
         this._command = command
     }
 
@@ -18,6 +17,14 @@ class BaseHandler {
     }
     get_position() {
         return this._position
+    }
+
+    set_hide(hide) {
+        this._hide = hide
+    }
+
+    get_hide() {
+        return this._hide
     }
 
     set_extra_params(params)  {

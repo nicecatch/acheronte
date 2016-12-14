@@ -1,10 +1,12 @@
 class InternalMakerList {
     constructor(router) {
         this._managerDispatcherList = {
-            'wifi': WifiMaker,
-            'reload': ReloadMaker,
             'battery': BatteryMaker,
+            'collapse': CollapseMaker,
+            'hostname': HostnameMaker,
             'link': LinkMaker,
+            'reload': ReloadMaker,
+            'wifi': WifiMaker,
             'zoom_minus': ZoomMinusMaker,
             'zoom_plus': ZoomPlusMaker
         }

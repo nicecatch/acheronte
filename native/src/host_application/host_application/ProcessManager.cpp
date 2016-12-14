@@ -6,6 +6,8 @@ ProcessManager::ProcessManager()
 
 string ProcessManager::StartProcess(char* cmd, bool async)
 {
+	fstream myStream;
+	myStream.open("C:\\Users\\testtablet\\Desktop\\example.txt", ios::app | ios::out);
 	unsigned int errorMode = SetErrorMode(SEM_NOOPENFILEERRORBOX | SEM_FAILCRITICALERRORS | SEM_NOGPFAULTERRORBOX);
 
 	STARTUPINFO si;
@@ -23,6 +25,9 @@ string ProcessManager::StartProcess(char* cmd, bool async)
 
 	if (!async) 
 	{
+
+		myStream << "trying to open (not async): " << cmd << endl;
+
 		SECURITY_ATTRIBUTES saAttr;
 
 		saAttr.nLength = sizeof(SECURITY_ATTRIBUTES);
@@ -44,6 +49,7 @@ string ProcessManager::StartProcess(char* cmd, bool async)
 	}
 	else
 	{
+		myStream << "trying to open (async): " << cmd << endl;
 		handleInherited = false;
 		creationFlags = CREATE_NEW_PROCESS_GROUP;
 	}
@@ -63,6 +69,7 @@ string ProcessManager::StartProcess(char* cmd, bool async)
 
 	if (!success)
 	{
+		myStream << "Failed to open: " << GetLastError() << endl;
 		return "";
 	}
 

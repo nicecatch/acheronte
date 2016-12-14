@@ -1,6 +1,7 @@
 class InternalHandlerList {
     constructor() {
         this._managerDispatcherList = {
+            'hostname': HostnameHandler,
             'wifi': WifiHandler,
             'zoom_minus': ZoomMinusHandler,
             'zoom_plus': ZoomPlusHandler
@@ -51,6 +52,7 @@ class InternalDispatcher extends BaseDispatcher {
         }
 
         handler.set_position(parameter.position)
+        handler.set_hide(!!parameter.hide)
         if(parameter.extraParams)
         {
             handler.set_extra_params(parameter.extraParams)
@@ -65,7 +67,8 @@ class InternalDispatcher extends BaseDispatcher {
                     var elem_to_push = {
                         type: "0",
                         name: this._elements_registered[element].get_name(),
-                        position: this._elements_registered[element].get_position()
+                        position: this._elements_registered[element].get_position(),
+                        hide: this._elements_registered[element].get_hide()
                     }
 
                     if(this._elements_registered[element].get_extra_params()) {
