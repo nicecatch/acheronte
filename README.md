@@ -10,6 +10,8 @@ This extension can show a little dockbar injected inside HTML pages to provide s
 *    Wifi signal strength indicator
 *    Button to redirect page to a fixed address
 *    Program opener
+*    Collapse button
+*    Zoom buttons
 
 Also it provides:
 *    Autoreload on loading page error (dns, connection etc etc)
@@ -47,18 +49,13 @@ Install extension through Chrome Store or force install policy and restart Chrom
 
 
 ## Registry configuration
-    An example can be found under native/create_configuration.reg
-Quite self explanatory:
-*    Values must be REG_SZ inside the registry
-*    type: 1 is for external application, type: 0 for pre-configured ones
-*    Only one 'link' can be used
-*    Don't overlap names
+    An example can be found inside native/create_configuration.reg
 
 ### Tested on
-Windows 10 x64 + Chrome 54.0.2840.50
+Windows 10 x64 + Chrome 56.0.2924.21 beta (64-bit)
 
 ### Links
-[Chrome Web Store](https://chrome.google.com/webstore/detail/hjlojijobopljleofgaodpjaimjkjbjn "Chrome Web Store")
+[Chrome Web Store](https://chrome.google.com/webstore/detail/gbmeaocaejfnpefjcpjjnpdjbbnmobgn "Chrome Web Store")
 [GitHub](https://github.com/nicecatch/acheronte "GitHub")
 
 ### Future
