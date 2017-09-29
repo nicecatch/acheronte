@@ -21,15 +21,15 @@ Also it provides:
 ## Install
 This extension uses Chrome nativeMessaging support for opening external files and retrieving wifi signal strength
 
-####Step 1:
+#### Step 1:
 Compile host_application - under native/ - with a C++11 compiler
 
-####Step 2 (Optional ?):
+#### Step 2 (Optional ?):
 Deploy to Chrome Developer Dashboard your own extension located under extension/
 
 You can skip this step if you are willingly to use my published extension, but there is no warranty on future updates
 
-####Step 3:
+#### Step 3:
 Deploy these files in a fixed directory:
 *    native/
     *    manifest.json
@@ -39,16 +39,16 @@ and host_application.exe
 
 Substitute inside manifest.json the full path to host_application.exe and the extension ID you are using
 
-####Step 4:
+#### Step 4:
 Deploy native/register_application.reg substituting the path to manifest.json you deployed in previous step
 
-####Step 5:
+#### Step 5:
 Add configuration inside machine registry as explained below
 
-####Step 5b
+#### Step 5b
 Define a whitelist of permitted sites (example can be found below). No or empty whitelist is considered as full access to sites 
 
-####Step 6:
+#### Step 6:
 Install extension through Chrome Store or force install policy and restart Chrome
 
 
